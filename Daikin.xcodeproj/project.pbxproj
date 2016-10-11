@@ -1,0 +1,738 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		76424A1A1DA6983800240F53 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A131DA6983800240F53 /* AddViewController.m */; };
+		76424A1B1DA6983800240F53 /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76424A141DA6983800240F53 /* AddViewController.xib */; };
+		76424A1C1DA6983800240F53 /* ControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A161DA6983800240F53 /* ControlViewController.m */; };
+		76424A1D1DA6983800240F53 /* ControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76424A171DA6983800240F53 /* ControlViewController.xib */; };
+		76424A1E1DA6983800240F53 /* TerminalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A191DA6983800240F53 /* TerminalModel.m */; };
+		76424A4E1DA69D3000240F53 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A221DA69D3000240F53 /* MJRefreshAutoFooter.m */; };
+		76424A4F1DA69D3000240F53 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A241DA69D3000240F53 /* MJRefreshBackFooter.m */; };
+		76424A501DA69D3000240F53 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A261DA69D3000240F53 /* MJRefreshComponent.m */; };
+		76424A511DA69D3000240F53 /* MJRefreshFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A281DA69D3000240F53 /* MJRefreshFooter.m */; };
+		76424A521DA69D3000240F53 /* MJRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A2A1DA69D3000240F53 /* MJRefreshHeader.m */; };
+		76424A531DA69D3000240F53 /* MJRefreshAutoGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A2F1DA69D3000240F53 /* MJRefreshAutoGifFooter.m */; };
+		76424A541DA69D3000240F53 /* MJRefreshAutoNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A311DA69D3000240F53 /* MJRefreshAutoNormalFooter.m */; };
+		76424A551DA69D3000240F53 /* MJRefreshAutoStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A331DA69D3000240F53 /* MJRefreshAutoStateFooter.m */; };
+		76424A561DA69D3000240F53 /* MJRefreshBackGifFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A361DA69D3000240F53 /* MJRefreshBackGifFooter.m */; };
+		76424A571DA69D3000240F53 /* MJRefreshBackNormalFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A381DA69D3000240F53 /* MJRefreshBackNormalFooter.m */; };
+		76424A581DA69D3000240F53 /* MJRefreshBackStateFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A3A1DA69D3000240F53 /* MJRefreshBackStateFooter.m */; };
+		76424A591DA69D3000240F53 /* MJRefreshGifHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A3D1DA69D3000240F53 /* MJRefreshGifHeader.m */; };
+		76424A5A1DA69D3000240F53 /* MJRefreshNormalHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A3F1DA69D3000240F53 /* MJRefreshNormalHeader.m */; };
+		76424A5B1DA69D3000240F53 /* MJRefreshStateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A411DA69D3000240F53 /* MJRefreshStateHeader.m */; };
+		76424A5C1DA69D3000240F53 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 76424A421DA69D3000240F53 /* MJRefresh.bundle */; };
+		76424A5D1DA69D3000240F53 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A451DA69D3000240F53 /* MJRefreshConst.m */; };
+		76424A5E1DA69D3000240F53 /* NSBundle+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A471DA69D3000240F53 /* NSBundle+MJRefresh.m */; };
+		76424A5F1DA69D3000240F53 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A491DA69D3000240F53 /* UIScrollView+MJExtension.m */; };
+		76424A601DA69D3000240F53 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A4B1DA69D3000240F53 /* UIScrollView+MJRefresh.m */; };
+		76424A611DA69D3000240F53 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A4D1DA69D3000240F53 /* UIView+MJExtension.m */; };
+		76530F411DA69720005CAA5C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76530F401DA69720005CAA5C /* main.m */; };
+		76530F441DA69720005CAA5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76530F431DA69720005CAA5C /* AppDelegate.m */; };
+		76530F471DA69720005CAA5C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76530F461DA69720005CAA5C /* ViewController.m */; };
+		76530F4A1DA69720005CAA5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76530F481DA69720005CAA5C /* Main.storyboard */; };
+		76530F4C1DA69720005CAA5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76530F4B1DA69720005CAA5C /* Assets.xcassets */; };
+		76530F4F1DA69720005CAA5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76530F4D1DA69720005CAA5C /* LaunchScreen.storyboard */; };
+		76530F5A1DA69720005CAA5C /* DaikinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76530F591DA69720005CAA5C /* DaikinTests.m */; };
+		76530F651DA69720005CAA5C /* DaikinUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76530F641DA69720005CAA5C /* DaikinUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		76530F561DA69720005CAA5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76530F341DA69720005CAA5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76530F3B1DA69720005CAA5C;
+			remoteInfo = Daikin;
+		};
+		76530F611DA69720005CAA5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76530F341DA69720005CAA5C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76530F3B1DA69720005CAA5C;
+			remoteInfo = Daikin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		76424A121DA6983800240F53 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
+		76424A131DA6983800240F53 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
+		76424A141DA6983800240F53 /* AddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
+		76424A151DA6983800240F53 /* ControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlViewController.h; sourceTree = "<group>"; };
+		76424A161DA6983800240F53 /* ControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlViewController.m; sourceTree = "<group>"; };
+		76424A171DA6983800240F53 /* ControlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlViewController.xib; sourceTree = "<group>"; };
+		76424A181DA6983800240F53 /* TerminalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerminalModel.h; sourceTree = "<group>"; };
+		76424A191DA6983800240F53 /* TerminalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TerminalModel.m; sourceTree = "<group>"; };
+		76424A211DA69D3000240F53 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
+		76424A221DA69D3000240F53 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
+		76424A231DA69D3000240F53 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
+		76424A241DA69D3000240F53 /* MJRefreshBackFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBackFooter.m; sourceTree = "<group>"; };
+		76424A251DA69D3000240F53 /* MJRefreshComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshComponent.h; sourceTree = "<group>"; };
+		76424A261DA69D3000240F53 /* MJRefreshComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshComponent.m; sourceTree = "<group>"; };
+		76424A271DA69D3000240F53 /* MJRefreshFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooter.h; sourceTree = "<group>"; };
+		76424A281DA69D3000240F53 /* MJRefreshFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooter.m; sourceTree = "<group>"; };
+		76424A291DA69D3000240F53 /* MJRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeader.h; sourceTree = "<group>"; };
+		76424A2A1DA69D3000240F53 /* MJRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeader.m; sourceTree = "<group>"; };
+		76424A2E1DA69D3000240F53 /* MJRefreshAutoGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoGifFooter.h; sourceTree = "<group>"; };
+		76424A2F1DA69D3000240F53 /* MJRefreshAutoGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoGifFooter.m; sourceTree = "<group>"; };
+		76424A301DA69D3000240F53 /* MJRefreshAutoNormalFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoNormalFooter.h; sourceTree = "<group>"; };
+		76424A311DA69D3000240F53 /* MJRefreshAutoNormalFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoNormalFooter.m; sourceTree = "<group>"; };
+		76424A321DA69D3000240F53 /* MJRefreshAutoStateFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoStateFooter.h; sourceTree = "<group>"; };
+		76424A331DA69D3000240F53 /* MJRefreshAutoStateFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoStateFooter.m; sourceTree = "<group>"; };
+		76424A351DA69D3000240F53 /* MJRefreshBackGifFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackGifFooter.h; sourceTree = "<group>"; };
+		76424A361DA69D3000240F53 /* MJRefreshBackGifFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBackGifFooter.m; sourceTree = "<group>"; };
+		76424A371DA69D3000240F53 /* MJRefreshBackNormalFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackNormalFooter.h; sourceTree = "<group>"; };
+		76424A381DA69D3000240F53 /* MJRefreshBackNormalFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBackNormalFooter.m; sourceTree = "<group>"; };
+		76424A391DA69D3000240F53 /* MJRefreshBackStateFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackStateFooter.h; sourceTree = "<group>"; };
+		76424A3A1DA69D3000240F53 /* MJRefreshBackStateFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBackStateFooter.m; sourceTree = "<group>"; };
+		76424A3C1DA69D3000240F53 /* MJRefreshGifHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshGifHeader.h; sourceTree = "<group>"; };
+		76424A3D1DA69D3000240F53 /* MJRefreshGifHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshGifHeader.m; sourceTree = "<group>"; };
+		76424A3E1DA69D3000240F53 /* MJRefreshNormalHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshNormalHeader.h; sourceTree = "<group>"; };
+		76424A3F1DA69D3000240F53 /* MJRefreshNormalHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshNormalHeader.m; sourceTree = "<group>"; };
+		76424A401DA69D3000240F53 /* MJRefreshStateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshStateHeader.h; sourceTree = "<group>"; };
+		76424A411DA69D3000240F53 /* MJRefreshStateHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshStateHeader.m; sourceTree = "<group>"; };
+		76424A421DA69D3000240F53 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
+		76424A431DA69D3000240F53 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
+		76424A441DA69D3000240F53 /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
+		76424A451DA69D3000240F53 /* MJRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshConst.m; sourceTree = "<group>"; };
+		76424A461DA69D3000240F53 /* NSBundle+MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+MJRefresh.h"; sourceTree = "<group>"; };
+		76424A471DA69D3000240F53 /* NSBundle+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+MJRefresh.m"; sourceTree = "<group>"; };
+		76424A481DA69D3000240F53 /* UIScrollView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJExtension.h"; sourceTree = "<group>"; };
+		76424A491DA69D3000240F53 /* UIScrollView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJExtension.m"; sourceTree = "<group>"; };
+		76424A4A1DA69D3000240F53 /* UIScrollView+MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJRefresh.h"; sourceTree = "<group>"; };
+		76424A4B1DA69D3000240F53 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
+		76424A4C1DA69D3000240F53 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
+		76424A4D1DA69D3000240F53 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		76530F3C1DA69720005CAA5C /* Daikin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Daikin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76530F401DA69720005CAA5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		76530F421DA69720005CAA5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		76530F431DA69720005CAA5C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		76530F451DA69720005CAA5C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		76530F461DA69720005CAA5C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		76530F491DA69720005CAA5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		76530F4B1DA69720005CAA5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		76530F4E1DA69720005CAA5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		76530F501DA69720005CAA5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76530F551DA69720005CAA5C /* DaikinTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DaikinTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76530F591DA69720005CAA5C /* DaikinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DaikinTests.m; sourceTree = "<group>"; };
+		76530F5B1DA69720005CAA5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76530F601DA69720005CAA5C /* DaikinUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DaikinUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76530F641DA69720005CAA5C /* DaikinUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DaikinUITests.m; sourceTree = "<group>"; };
+		76530F661DA69720005CAA5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		76530F391DA69720005CAA5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76530F521DA69720005CAA5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76530F5D1DA69720005CAA5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		76424A1F1DA69D3000240F53 /* MJRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				76424A201DA69D3000240F53 /* Base */,
+				76424A2B1DA69D3000240F53 /* Custom */,
+				76424A421DA69D3000240F53 /* MJRefresh.bundle */,
+				76424A431DA69D3000240F53 /* MJRefresh.h */,
+				76424A441DA69D3000240F53 /* MJRefreshConst.h */,
+				76424A451DA69D3000240F53 /* MJRefreshConst.m */,
+				76424A461DA69D3000240F53 /* NSBundle+MJRefresh.h */,
+				76424A471DA69D3000240F53 /* NSBundle+MJRefresh.m */,
+				76424A481DA69D3000240F53 /* UIScrollView+MJExtension.h */,
+				76424A491DA69D3000240F53 /* UIScrollView+MJExtension.m */,
+				76424A4A1DA69D3000240F53 /* UIScrollView+MJRefresh.h */,
+				76424A4B1DA69D3000240F53 /* UIScrollView+MJRefresh.m */,
+				76424A4C1DA69D3000240F53 /* UIView+MJExtension.h */,
+				76424A4D1DA69D3000240F53 /* UIView+MJExtension.m */,
+			);
+			path = MJRefresh;
+			sourceTree = "<group>";
+		};
+		76424A201DA69D3000240F53 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				76424A211DA69D3000240F53 /* MJRefreshAutoFooter.h */,
+				76424A221DA69D3000240F53 /* MJRefreshAutoFooter.m */,
+				76424A231DA69D3000240F53 /* MJRefreshBackFooter.h */,
+				76424A241DA69D3000240F53 /* MJRefreshBackFooter.m */,
+				76424A251DA69D3000240F53 /* MJRefreshComponent.h */,
+				76424A261DA69D3000240F53 /* MJRefreshComponent.m */,
+				76424A271DA69D3000240F53 /* MJRefreshFooter.h */,
+				76424A281DA69D3000240F53 /* MJRefreshFooter.m */,
+				76424A291DA69D3000240F53 /* MJRefreshHeader.h */,
+				76424A2A1DA69D3000240F53 /* MJRefreshHeader.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		76424A2B1DA69D3000240F53 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				76424A2C1DA69D3000240F53 /* Footer */,
+				76424A3B1DA69D3000240F53 /* Header */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		76424A2C1DA69D3000240F53 /* Footer */ = {
+			isa = PBXGroup;
+			children = (
+				76424A2D1DA69D3000240F53 /* Auto */,
+				76424A341DA69D3000240F53 /* Back */,
+			);
+			path = Footer;
+			sourceTree = "<group>";
+		};
+		76424A2D1DA69D3000240F53 /* Auto */ = {
+			isa = PBXGroup;
+			children = (
+				76424A2E1DA69D3000240F53 /* MJRefreshAutoGifFooter.h */,
+				76424A2F1DA69D3000240F53 /* MJRefreshAutoGifFooter.m */,
+				76424A301DA69D3000240F53 /* MJRefreshAutoNormalFooter.h */,
+				76424A311DA69D3000240F53 /* MJRefreshAutoNormalFooter.m */,
+				76424A321DA69D3000240F53 /* MJRefreshAutoStateFooter.h */,
+				76424A331DA69D3000240F53 /* MJRefreshAutoStateFooter.m */,
+			);
+			path = Auto;
+			sourceTree = "<group>";
+		};
+		76424A341DA69D3000240F53 /* Back */ = {
+			isa = PBXGroup;
+			children = (
+				76424A351DA69D3000240F53 /* MJRefreshBackGifFooter.h */,
+				76424A361DA69D3000240F53 /* MJRefreshBackGifFooter.m */,
+				76424A371DA69D3000240F53 /* MJRefreshBackNormalFooter.h */,
+				76424A381DA69D3000240F53 /* MJRefreshBackNormalFooter.m */,
+				76424A391DA69D3000240F53 /* MJRefreshBackStateFooter.h */,
+				76424A3A1DA69D3000240F53 /* MJRefreshBackStateFooter.m */,
+			);
+			path = Back;
+			sourceTree = "<group>";
+		};
+		76424A3B1DA69D3000240F53 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				76424A3C1DA69D3000240F53 /* MJRefreshGifHeader.h */,
+				76424A3D1DA69D3000240F53 /* MJRefreshGifHeader.m */,
+				76424A3E1DA69D3000240F53 /* MJRefreshNormalHeader.h */,
+				76424A3F1DA69D3000240F53 /* MJRefreshNormalHeader.m */,
+				76424A401DA69D3000240F53 /* MJRefreshStateHeader.h */,
+				76424A411DA69D3000240F53 /* MJRefreshStateHeader.m */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
+		76530F331DA69720005CAA5C = {
+			isa = PBXGroup;
+			children = (
+				76530F3E1DA69720005CAA5C /* Daikin */,
+				76530F581DA69720005CAA5C /* DaikinTests */,
+				76530F631DA69720005CAA5C /* DaikinUITests */,
+				76530F3D1DA69720005CAA5C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		76530F3D1DA69720005CAA5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76530F3C1DA69720005CAA5C /* Daikin.app */,
+				76530F551DA69720005CAA5C /* DaikinTests.xctest */,
+				76530F601DA69720005CAA5C /* DaikinUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		76530F3E1DA69720005CAA5C /* Daikin */ = {
+			isa = PBXGroup;
+			children = (
+				76424A121DA6983800240F53 /* AddViewController.h */,
+				76424A131DA6983800240F53 /* AddViewController.m */,
+				76424A141DA6983800240F53 /* AddViewController.xib */,
+				76424A151DA6983800240F53 /* ControlViewController.h */,
+				76424A161DA6983800240F53 /* ControlViewController.m */,
+				76424A171DA6983800240F53 /* ControlViewController.xib */,
+				76424A181DA6983800240F53 /* TerminalModel.h */,
+				76424A191DA6983800240F53 /* TerminalModel.m */,
+				76530F421DA69720005CAA5C /* AppDelegate.h */,
+				76530F431DA69720005CAA5C /* AppDelegate.m */,
+				76530F451DA69720005CAA5C /* ViewController.h */,
+				76530F461DA69720005CAA5C /* ViewController.m */,
+				76424A1F1DA69D3000240F53 /* MJRefresh */,
+				76530F481DA69720005CAA5C /* Main.storyboard */,
+				76530F4B1DA69720005CAA5C /* Assets.xcassets */,
+				76530F4D1DA69720005CAA5C /* LaunchScreen.storyboard */,
+				76530F501DA69720005CAA5C /* Info.plist */,
+				76530F3F1DA69720005CAA5C /* Supporting Files */,
+			);
+			path = Daikin;
+			sourceTree = "<group>";
+		};
+		76530F3F1DA69720005CAA5C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				76530F401DA69720005CAA5C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		76530F581DA69720005CAA5C /* DaikinTests */ = {
+			isa = PBXGroup;
+			children = (
+				76530F591DA69720005CAA5C /* DaikinTests.m */,
+				76530F5B1DA69720005CAA5C /* Info.plist */,
+			);
+			path = DaikinTests;
+			sourceTree = "<group>";
+		};
+		76530F631DA69720005CAA5C /* DaikinUITests */ = {
+			isa = PBXGroup;
+			children = (
+				76530F641DA69720005CAA5C /* DaikinUITests.m */,
+				76530F661DA69720005CAA5C /* Info.plist */,
+			);
+			path = DaikinUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		76530F3B1DA69720005CAA5C /* Daikin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76530F691DA69720005CAA5C /* Build configuration list for PBXNativeTarget "Daikin" */;
+			buildPhases = (
+				76530F381DA69720005CAA5C /* Sources */,
+				76530F391DA69720005CAA5C /* Frameworks */,
+				76530F3A1DA69720005CAA5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Daikin;
+			productName = Daikin;
+			productReference = 76530F3C1DA69720005CAA5C /* Daikin.app */;
+			productType = "com.apple.product-type.application";
+		};
+		76530F541DA69720005CAA5C /* DaikinTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76530F6C1DA69720005CAA5C /* Build configuration list for PBXNativeTarget "DaikinTests" */;
+			buildPhases = (
+				76530F511DA69720005CAA5C /* Sources */,
+				76530F521DA69720005CAA5C /* Frameworks */,
+				76530F531DA69720005CAA5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76530F571DA69720005CAA5C /* PBXTargetDependency */,
+			);
+			name = DaikinTests;
+			productName = DaikinTests;
+			productReference = 76530F551DA69720005CAA5C /* DaikinTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		76530F5F1DA69720005CAA5C /* DaikinUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76530F6F1DA69720005CAA5C /* Build configuration list for PBXNativeTarget "DaikinUITests" */;
+			buildPhases = (
+				76530F5C1DA69720005CAA5C /* Sources */,
+				76530F5D1DA69720005CAA5C /* Frameworks */,
+				76530F5E1DA69720005CAA5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76530F621DA69720005CAA5C /* PBXTargetDependency */,
+			);
+			name = DaikinUITests;
+			productName = DaikinUITests;
+			productReference = 76530F601DA69720005CAA5C /* DaikinUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		76530F341DA69720005CAA5C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = smile.zhang;
+				TargetAttributes = {
+					76530F3B1DA69720005CAA5C = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = MA33R8944A;
+						ProvisioningStyle = Automatic;
+					};
+					76530F541DA69720005CAA5C = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 76530F3B1DA69720005CAA5C;
+					};
+					76530F5F1DA69720005CAA5C = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 76530F3B1DA69720005CAA5C;
+					};
+				};
+			};
+			buildConfigurationList = 76530F371DA69720005CAA5C /* Build configuration list for PBXProject "Daikin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 76530F331DA69720005CAA5C;
+			productRefGroup = 76530F3D1DA69720005CAA5C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				76530F3B1DA69720005CAA5C /* Daikin */,
+				76530F541DA69720005CAA5C /* DaikinTests */,
+				76530F5F1DA69720005CAA5C /* DaikinUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		76530F3A1DA69720005CAA5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76424A1D1DA6983800240F53 /* ControlViewController.xib in Resources */,
+				76530F4F1DA69720005CAA5C /* LaunchScreen.storyboard in Resources */,
+				76424A5C1DA69D3000240F53 /* MJRefresh.bundle in Resources */,
+				76530F4C1DA69720005CAA5C /* Assets.xcassets in Resources */,
+				76424A1B1DA6983800240F53 /* AddViewController.xib in Resources */,
+				76530F4A1DA69720005CAA5C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76530F531DA69720005CAA5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76530F5E1DA69720005CAA5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		76530F381DA69720005CAA5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76530F471DA69720005CAA5C /* ViewController.m in Sources */,
+				76424A4E1DA69D3000240F53 /* MJRefreshAutoFooter.m in Sources */,
+				76424A551DA69D3000240F53 /* MJRefreshAutoStateFooter.m in Sources */,
+				76424A581DA69D3000240F53 /* MJRefreshBackStateFooter.m in Sources */,
+				76530F441DA69720005CAA5C /* AppDelegate.m in Sources */,
+				76424A5B1DA69D3000240F53 /* MJRefreshStateHeader.m in Sources */,
+				76424A1A1DA6983800240F53 /* AddViewController.m in Sources */,
+				76424A5F1DA69D3000240F53 /* UIScrollView+MJExtension.m in Sources */,
+				76424A591DA69D3000240F53 /* MJRefreshGifHeader.m in Sources */,
+				76424A571DA69D3000240F53 /* MJRefreshBackNormalFooter.m in Sources */,
+				76530F411DA69720005CAA5C /* main.m in Sources */,
+				76424A501DA69D3000240F53 /* MJRefreshComponent.m in Sources */,
+				76424A541DA69D3000240F53 /* MJRefreshAutoNormalFooter.m in Sources */,
+				76424A1C1DA6983800240F53 /* ControlViewController.m in Sources */,
+				76424A531DA69D3000240F53 /* MJRefreshAutoGifFooter.m in Sources */,
+				76424A4F1DA69D3000240F53 /* MJRefreshBackFooter.m in Sources */,
+				76424A611DA69D3000240F53 /* UIView+MJExtension.m in Sources */,
+				76424A5E1DA69D3000240F53 /* NSBundle+MJRefresh.m in Sources */,
+				76424A1E1DA6983800240F53 /* TerminalModel.m in Sources */,
+				76424A511DA69D3000240F53 /* MJRefreshFooter.m in Sources */,
+				76424A5D1DA69D3000240F53 /* MJRefreshConst.m in Sources */,
+				76424A601DA69D3000240F53 /* UIScrollView+MJRefresh.m in Sources */,
+				76424A561DA69D3000240F53 /* MJRefreshBackGifFooter.m in Sources */,
+				76424A521DA69D3000240F53 /* MJRefreshHeader.m in Sources */,
+				76424A5A1DA69D3000240F53 /* MJRefreshNormalHeader.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76530F511DA69720005CAA5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76530F5A1DA69720005CAA5C /* DaikinTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76530F5C1DA69720005CAA5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76530F651DA69720005CAA5C /* DaikinUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		76530F571DA69720005CAA5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76530F3B1DA69720005CAA5C /* Daikin */;
+			targetProxy = 76530F561DA69720005CAA5C /* PBXContainerItemProxy */;
+		};
+		76530F621DA69720005CAA5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76530F3B1DA69720005CAA5C /* Daikin */;
+			targetProxy = 76530F611DA69720005CAA5C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		76530F481DA69720005CAA5C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76530F491DA69720005CAA5C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		76530F4D1DA69720005CAA5C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76530F4E1DA69720005CAA5C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		76530F671DA69720005CAA5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		76530F681DA69720005CAA5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		76530F6A1DA69720005CAA5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MA33R8944A;
+				INFOPLIST_FILE = Daikin/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devzhang.Daikin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		76530F6B1DA69720005CAA5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = MA33R8944A;
+				INFOPLIST_FILE = Daikin/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devzhang.Daikin;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		76530F6D1DA69720005CAA5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DaikinTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devzhang.DaikinTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daikin.app/Daikin";
+			};
+			name = Debug;
+		};
+		76530F6E1DA69720005CAA5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DaikinTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devzhang.DaikinTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Daikin.app/Daikin";
+			};
+			name = Release;
+		};
+		76530F701DA69720005CAA5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = DaikinUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devzhang.DaikinUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Daikin;
+			};
+			name = Debug;
+		};
+		76530F711DA69720005CAA5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = DaikinUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.devzhang.DaikinUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Daikin;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76530F371DA69720005CAA5C /* Build configuration list for PBXProject "Daikin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76530F671DA69720005CAA5C /* Debug */,
+				76530F681DA69720005CAA5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76530F691DA69720005CAA5C /* Build configuration list for PBXNativeTarget "Daikin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76530F6A1DA69720005CAA5C /* Debug */,
+				76530F6B1DA69720005CAA5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76530F6C1DA69720005CAA5C /* Build configuration list for PBXNativeTarget "DaikinTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76530F6D1DA69720005CAA5C /* Debug */,
+				76530F6E1DA69720005CAA5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76530F6F1DA69720005CAA5C /* Build configuration list for PBXNativeTarget "DaikinUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76530F701DA69720005CAA5C /* Debug */,
+				76530F711DA69720005CAA5C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 76530F341DA69720005CAA5C /* Project object */;
+}
