@@ -21,9 +21,11 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *ssidLabel;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UISwitch *isHiddleSsid;
 @property (weak, nonatomic) IBOutlet UITextField *taskCountTextField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
 @property (weak, nonatomic) IBOutlet UIButton *confirmButton;
+
 
 @end
