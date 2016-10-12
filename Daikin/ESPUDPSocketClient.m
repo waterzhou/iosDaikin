@@ -122,6 +122,7 @@
     addr_len = sizeof(target_addr);
     if (isBroadcast) {
         const int opt = 1;
+        NSLog(@"Set to use broadcast");
         // set whether the socket is broadcast or not
         if (setsockopt(self._sck_fd,SOL_SOCKET,SO_BROADCAST,(char *)&opt, sizeof(opt)) < 0)
         {

@@ -12,6 +12,7 @@
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include "ESPTouchTask.h"
+#include "ESP_ByteUtil.h"
 
 @interface ESPUDPSocketServer ()
 
@@ -141,6 +142,24 @@
     }
 }
 
+- (Byte) recvfromClient
+{
+    struct sockaddr_in fromAddr;
+    socklen_t fromAddrLen = sizeof fromAddr;
+    ssize_t recNumber = recvfrom(self._sck_fd, _buffer,sizeof _buffer, 0,(struct sockaddr *)&fromAddr, &fromAddrLen);
+    if (recNumber > 0)
+    {
+        char display[16] = {0};
+        inet_ntop(AF_INET, &fromAddr.sin_addr,display, sizeof display);
+        
+        NSData *data = [[NSData alloc]initWithBytes:_buffer length:recNumber];
+        NSString *content = [ESP_ByteUtil getHexStringByData:data];
+        NSLog(@"From %s :%@", display, content);
+        
+    }
+    return UINT8_MAX;
+}
+
 - (Byte) receiveOneByte
 {
     ssize_t recNumber = recv(self._sck_fd, _buffer, BUFFER_SIZE, 0);
@@ -168,7 +187,7 @@
 - (NSData *) receiveSpecLenBytes: (int)len
 {
     ssize_t recNumber = recv(self._sck_fd, _buffer, BUFFER_SIZE, 0);
-    if (recNumber==len)
+    if (recNumber > 0)//(recNumber==len)
     {
         NSData *data = [[NSData alloc]initWithBytes:_buffer length:recNumber];
         return data;
@@ -189,7 +208,8 @@
     }
     else
     {
-        // receive rubbish message, just ignore it
+          // receive rubbish message, just ignore it
+        NSLog(@"receive rubbish");
     }
     return nil;
 }

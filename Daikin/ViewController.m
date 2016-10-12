@@ -11,12 +11,17 @@
 #import "MJRefresh.h"
 #import "AddViewController.h"
 #import "ControlViewController.h"
+#import "ESPUDPSocketServer.h"
 
 static NSString *kCellIdentify = @"cell";
 
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate,AddTerminalDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datasource;
+@property (atomic,assign) BOOL stop;
+@property (nonatomic,strong) ESPUDPSocketServer *DiscoveryServer;
+@property (nonatomic, retain) NSTimer *aTimer;
+
 @end
 
 @implementation ViewController
@@ -27,6 +32,9 @@ static NSString *kCellIdentify = @"cell";
     self.title = @"设备列表";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add)];
     [self tableView];
+    self.stop = true;
+    self.DiscoveryServer = [[ESPUDPSocketServer alloc]initWithPort:6666 AndSocketTimeout:15000];
+    
 }
 
 
@@ -45,9 +53,22 @@ static NSString *kCellIdentify = @"cell";
 - (void)refresh {
     // 这里是下拉刷新执行的方法，可以做一些事情
     [self.tableView reloadData];
+    NSLog(@"Drag to refresh");
+    
 
+    [self createUDPdiscoveryTask];
+    if([self.aTimer isValid]) {
+        [self.aTimer invalidate], self.aTimer = nil;
+    }
+    self.stop = false;
+    self.aTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(runScheduledTask) userInfo:nil repeats:NO];
     // 记得刷新完成后结束刷新的UI哦，需要完成任务后手动调用哦
     [self.tableView.mj_header endRefreshing];
+}
+
+- (void)runScheduledTask{
+    self.stop = true;
+    self.aTimer = nil;
 }
 
 #pragma mark - AddTermainalDelegate
@@ -102,5 +123,19 @@ static NSString *kCellIdentify = @"cell";
     return _datasource;
 }
 
+- (void) createUDPdiscoveryTask {
+    NSLog(@"Start UDP discoveryTask");
+    dispatch_queue_t  queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        NSTimeInterval startTimestamp = [[NSDate date] timeIntervalSince1970];
+        NSData *receiveData = nil;
+        while(!self.stop)
+        {
+            
+            [self.DiscoveryServer recvfromClient];//1+6+4 resultlen+ maclen+iplen
+            NSLog(@"receive:%@", receiveData);
+        }
+    });
+}
 
 @end
