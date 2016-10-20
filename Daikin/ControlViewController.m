@@ -27,7 +27,7 @@
     [super viewDidLoad];
     self.title = @"控制中心";
     // Do any additional setup after loading the view from its nib.
-
+    NSLog(@"Pass IP is %@", _terminal.ip);
     [self button1];
     [self button2];
     [self textView];
@@ -75,7 +75,7 @@
 - (UIButton *)button1 {
     if (!_button1) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(50, 120, self.viewWidth - 100, 44)];
-        [button setTitle:@"按钮1" forState:UIControlStateNormal];
+        [button setTitle:@"获取温度" forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:15];
         [button setBackgroundColor:[UIColor whiteColor]];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -92,7 +92,7 @@
 - (UIButton *)button2 {
     if (!_button2) {
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(50, 200, self.viewWidth - 100, 44)];
-        [button setTitle:@"按钮2" forState:UIControlStateNormal];
+        [button setTitle:@"获取camera" forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:14];
         [button setBackgroundColor:[UIColor whiteColor]];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

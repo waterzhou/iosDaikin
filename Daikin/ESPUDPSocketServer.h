@@ -35,7 +35,7 @@
  * @return one byte receive from the port or UINT8_MAX(it impossible receive it from the socket)
  */
 - (Byte) receiveOneByte;
-- (Byte) recvfromClient;
+- (NSString *) recvfromClient;
 
 - (NSData *) receiveSpecLenBytes: (int)len;
 

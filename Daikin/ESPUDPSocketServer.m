@@ -142,7 +142,7 @@
     }
 }
 
-- (Byte) recvfromClient
+- (NSString*) recvfromClient
 {
     struct sockaddr_in fromAddr;
     socklen_t fromAddrLen = sizeof fromAddr;
@@ -151,13 +151,18 @@
     {
         char display[16] = {0};
         inet_ntop(AF_INET, &fromAddr.sin_addr,display, sizeof display);
+        if(_buffer[0] == 0x00 && _buffer[1] == 0x02)
+        {
+            NSLog(@"Get valid device");
+        }
+        NSData *data = [[NSData alloc]initWithBytes:&_buffer[12] length:(recNumber - 12)];
         
-        NSData *data = [[NSData alloc]initWithBytes:_buffer length:recNumber];
-        NSString *content = [ESP_ByteUtil getHexStringByData:data];
-        NSLog(@"From %s :%@", display, content);
-        
+        NSString *ReturnData = [NSString stringWithFormat:@"%@+%s",data,display];
+        NSLog(@"Form %s:%@", display, data);
+        return ReturnData;
+    } else {
+        return nil;
     }
-    return UINT8_MAX;
 }
 
 - (Byte) receiveOneByte

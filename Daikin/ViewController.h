@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Terminalmodel.h"
 
 @interface ViewController : UIViewController
 

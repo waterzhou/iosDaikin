@@ -18,6 +18,8 @@ static NSString *kCellIdentify = @"cell";
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate,AddTerminalDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *datasource;
+@property (nonatomic, strong) NSMutableArray *dataname;
+
 @property (atomic,assign) BOOL stop;
 @property (nonatomic,strong) ESPUDPSocketServer *DiscoveryServer;
 @property (nonatomic, retain) NSTimer *aTimer;
@@ -74,11 +76,22 @@ static NSString *kCellIdentify = @"cell";
 #pragma mark - AddTermainalDelegate
 - (void)addTermainal:(TerminalModel *)terminal {
     if (terminal && [terminal isKindOfClass:[TerminalModel class]]) {
+        
         [self.datasource addObject:terminal];
         [self.tableView reloadData];
     }
 }
-
+//用于判断是否已经包含
+- (BOOL) isIncludedByDatasource:(TerminalModel *)terminal{
+    //遍历比较，相等的话直接返回
+    for (int i=0;i<[self.datasource count];i++)
+    {
+        TerminalModel *term = (TerminalModel *)[self.datasource objectAtIndex:i];
+        if([term.name isEqualToString:terminal.name])
+            return true;
+    }
+      return false;
+}
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.datasource.count;
@@ -96,6 +109,9 @@ static NSString *kCellIdentify = @"cell";
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    //离开之前停掉udp服务
+    self.stop = true;
+    
     TerminalModel *terminal = (TerminalModel *)[self.datasource objectAtIndex:indexPath.row];
     ControlViewController *controller = [[ControlViewController alloc] initWithNibName:@"ControlViewController" bundle:nil terminal:terminal];
     [self.navigationController pushViewController:controller animated:YES];
@@ -128,12 +144,34 @@ static NSString *kCellIdentify = @"cell";
     dispatch_queue_t  queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         NSTimeInterval startTimestamp = [[NSDate date] timeIntervalSince1970];
-        NSData *receiveData = nil;
+        NSString *receiveData = nil;
         while(!self.stop)
         {
-            
-            [self.DiscoveryServer recvfromClient];//1+6+4 resultlen+ maclen+iplen
+            receiveData = [self.DiscoveryServer recvfromClient];//1+6+4 resultlen+ maclen+iplen
             NSLog(@"receive:%@", receiveData);
+            //receive:<5ccf7f21 e8af>+192.168.9.111
+            TerminalModel *terminal = [[TerminalModel alloc] init];
+            // 给模型赋值
+            NSString *symbol = @">+";
+            NSRange iStart = [receiveData rangeOfString: symbol options:NSCaseInsensitiveSearch];
+         
+            terminal.ip = [receiveData  substringFromIndex:iStart.location + 2]; ;
+            terminal.name = [receiveData  substringToIndex:iStart.location + 1];
+            NSLog(@"IP=%@", terminal.ip);
+            NSLog(@"NAME=%@", terminal.name);
+            if(![self isIncludedByDatasource:terminal]){
+                NSLog(@"need to add");
+                [self addTermainal:terminal];
+            } else {
+                NSLog(@"Whether need to release....need to check");
+            }
+            //terminal.ssid = @"SDKJSUIJKLJSDGXVKJLDSFJLKJGKLSDGKL";
+            //terminal.isOn = NO;
+            // 模型回传，直接传至上一个界面
+            // if (self.delegate) {
+            //    [self.delegate addTermainal:terminal];
+            //}
+
         }
     });
 }
