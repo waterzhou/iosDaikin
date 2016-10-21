@@ -68,11 +68,11 @@ int esp_socket_wait_available(int sckfd, int timeout)
     if (select(sckfd + 1, &set, NULL, NULL, &timeoutval) > 0)
     {
         int len = esp_socket_getopt_rcv_buffer(sckfd);
-        printf("select OK..........%d\r\n", len);
+        //printf("select OK..........%d\r\n", len);
         return len;
     }
     else {
-        printf("select error============\r\n");
+        //printf("select error============\r\n");
         return 0;
     }
 }

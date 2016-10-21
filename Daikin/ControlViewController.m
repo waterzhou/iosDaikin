@@ -76,7 +76,12 @@ BOOL isNeedUpdateUI = false;
 }
 
 - (void)click2 {
-    [self addString:@"按钮2"];
+    //[self addString:@"按钮2"];
+    if ([self isConnected] && !_isClosed) {
+        [_socket writeStr:@"getpicture"];
+        NSLog(@"get picture command.......");
+    }
+
 }
 
 - (void)createTcpClientTask {
