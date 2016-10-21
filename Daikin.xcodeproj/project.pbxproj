@@ -20,6 +20,8 @@
 		2C2459421DACD79700B374C0 /* IPAddress.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C2459401DACD79700B374C0 /* IPAddress.c */; };
 		2C2459481DACD7F700B374C0 /* ESPUDPSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2459451DACD7F700B374C0 /* ESPUDPSocketClient.m */; };
 		2C2459491DACD7F700B374C0 /* ESPUDPSocketServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2459471DACD7F700B374C0 /* ESPUDPSocketServer.m */; };
+		2C5EA19E1DB88B3A0086F21C /* ESPSocketClient2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EA19D1DB88B3A0086F21C /* ESPSocketClient2.m */; };
+		2C5EA1A11DB88C020086F21C /* esp_csocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EA19F1DB88C020086F21C /* esp_csocket.c */; };
 		76424A1A1DA6983800240F53 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A131DA6983800240F53 /* AddViewController.m */; };
 		76424A1B1DA6983800240F53 /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76424A141DA6983800240F53 /* AddViewController.xib */; };
 		76424A1C1DA6983800240F53 /* ControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A161DA6983800240F53 /* ControlViewController.m */; };
@@ -99,6 +101,10 @@
 		2C2459451DACD7F700B374C0 /* ESPUDPSocketClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPUDPSocketClient.m; sourceTree = "<group>"; };
 		2C2459461DACD7F700B374C0 /* ESPUDPSocketServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPUDPSocketServer.h; sourceTree = "<group>"; };
 		2C2459471DACD7F700B374C0 /* ESPUDPSocketServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPUDPSocketServer.m; sourceTree = "<group>"; };
+		2C5EA19C1DB88B3A0086F21C /* ESPSocketClient2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPSocketClient2.h; sourceTree = "<group>"; };
+		2C5EA19D1DB88B3A0086F21C /* ESPSocketClient2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPSocketClient2.m; sourceTree = "<group>"; };
+		2C5EA19F1DB88C020086F21C /* esp_csocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = esp_csocket.c; sourceTree = "<group>"; };
+		2C5EA1A01DB88C020086F21C /* esp_csocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = esp_csocket.h; sourceTree = "<group>"; };
 		76424A121DA6983800240F53 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
 		76424A131DA6983800240F53 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
 		76424A141DA6983800240F53 /* AddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
@@ -244,6 +250,17 @@
 			name = udp;
 			sourceTree = "<group>";
 		};
+		2C5EA19B1DB88B230086F21C /* tcp */ = {
+			isa = PBXGroup;
+			children = (
+				2C5EA19F1DB88C020086F21C /* esp_csocket.c */,
+				2C5EA1A01DB88C020086F21C /* esp_csocket.h */,
+				2C5EA19C1DB88B3A0086F21C /* ESPSocketClient2.h */,
+				2C5EA19D1DB88B3A0086F21C /* ESPSocketClient2.m */,
+			);
+			name = tcp;
+			sourceTree = "<group>";
+		};
 		76424A1F1DA69D3000240F53 /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +379,7 @@
 		76530F3E1DA69720005CAA5C /* Daikin */ = {
 			isa = PBXGroup;
 			children = (
+				2C5EA19B1DB88B230086F21C /* tcp */,
 				2C2459431DACD7D600B374C0 /* udp */,
 				2C2459361DACD77700B374C0 /* util */,
 				2C2459291DACD6EC00B374C0 /* protocol */,
@@ -568,6 +586,8 @@
 				76424A591DA69D3000240F53 /* MJRefreshGifHeader.m in Sources */,
 				76424A571DA69D3000240F53 /* MJRefreshBackNormalFooter.m in Sources */,
 				76530F411DA69720005CAA5C /* main.m in Sources */,
+				2C5EA1A11DB88C020086F21C /* esp_csocket.c in Sources */,
+				2C5EA19E1DB88B3A0086F21C /* ESPSocketClient2.m in Sources */,
 				76424A501DA69D3000240F53 /* MJRefreshComponent.m in Sources */,
 				76424A541DA69D3000240F53 /* MJRefreshAutoNormalFooter.m in Sources */,
 				2C2459321DACD70500B374C0 /* ESPDataCode.m in Sources */,
@@ -739,6 +759,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = MA33R8944A;
 				INFOPLIST_FILE = Daikin/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devzhang.Daikin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -751,6 +772,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = MA33R8944A;
 				INFOPLIST_FILE = Daikin/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.devzhang.Daikin;
 				PRODUCT_NAME = "$(TARGET_NAME)";

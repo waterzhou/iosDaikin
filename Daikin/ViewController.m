@@ -35,7 +35,11 @@ static NSString *kCellIdentify = @"cell";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add)];
     [self tableView];
     self.stop = true;
-    self.DiscoveryServer = [[ESPUDPSocketServer alloc]initWithPort:6666 AndSocketTimeout:15000];
+    if (self.DiscoveryServer == nil) {
+        NSLog(@"Discovery server is created");
+        self.DiscoveryServer = [[ESPUDPSocketServer alloc]initWithPort:6666 AndSocketTimeout:15000];
+       [self createUDPdiscoveryTask];
+    }
     
 }
 
@@ -57,12 +61,11 @@ static NSString *kCellIdentify = @"cell";
     [self.tableView reloadData];
     NSLog(@"Drag to refresh");
     
-
-    [self createUDPdiscoveryTask];
     if([self.aTimer isValid]) {
         [self.aTimer invalidate], self.aTimer = nil;
     }
     self.stop = false;
+    
     self.aTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(runScheduledTask) userInfo:nil repeats:NO];
     // 记得刷新完成后结束刷新的UI哦，需要完成任务后手动调用哦
     [self.tableView.mj_header endRefreshing];
@@ -111,6 +114,7 @@ static NSString *kCellIdentify = @"cell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //离开之前停掉udp服务
     self.stop = true;
+    [self.DiscoveryServer interrupt];
     
     TerminalModel *terminal = (TerminalModel *)[self.datasource objectAtIndex:indexPath.row];
     ControlViewController *controller = [[ControlViewController alloc] initWithNibName:@"ControlViewController" bundle:nil terminal:terminal];
@@ -145,7 +149,8 @@ static NSString *kCellIdentify = @"cell";
     dispatch_async(queue, ^{
         NSTimeInterval startTimestamp = [[NSDate date] timeIntervalSince1970];
         NSString *receiveData = nil;
-        while(!self.stop)
+        while(true){
+        if(!self.stop)
         {
             receiveData = [self.DiscoveryServer recvfromClient];//1+6+4 resultlen+ maclen+iplen
             NSLog(@"receive:%@", receiveData);
@@ -159,7 +164,8 @@ static NSString *kCellIdentify = @"cell";
             terminal.name = [receiveData  substringToIndex:iStart.location + 1];
             NSLog(@"IP=%@", terminal.ip);
             NSLog(@"NAME=%@", terminal.name);
-            if(![self isIncludedByDatasource:terminal]){
+            if(![self isIncludedByDatasource:terminal]
+               && terminal.ip != nil){
                 NSLog(@"need to add");
                 [self addTermainal:terminal];
             } else {
@@ -172,6 +178,7 @@ static NSString *kCellIdentify = @"cell";
             //    [self.delegate addTermainal:terminal];
             //}
 
+        }
         }
     });
 }
