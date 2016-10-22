@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UIButton *button1;
 @property (nonatomic, strong) UIButton *button2;
 @property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) UIScrollView *imageBoundsView;
 // let ESPMeshSocket be executed completely even app entered background
 @property (nonatomic,assign) __block UIBackgroundTaskIdentifier _backgroundTask;
 @property (nonatomic, strong) __block ESPSocketClient2 *socket;
@@ -47,7 +48,8 @@ BOOL isNeedUpdateUI = false;
     NSLog(@"Pass IP is %@", _terminal.ip);
     [self button1];
     [self button2];
-    [self textView];
+//    [self textView];
+    [self imageBoundsView];
     [self createTcpClientTask];
 }
 
@@ -99,6 +101,7 @@ BOOL isNeedUpdateUI = false;
      
      });*/
 }
+
 - (void) beginBackgroundTask
 {
  
@@ -261,6 +264,19 @@ BOOL isNeedUpdateUI = false;
         _textView = textView;
     }
     return _textView;
+}
+
+- (UIScrollView *)imageBoundsView {
+    if (!_imageBoundsView) {
+        UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(30, 280, self.viewWidth - 60, 150)];
+        view.backgroundColor = [UIColor whiteColor];
+        view.layer.cornerRadius = 3.0;
+        view.layer.borderColor = [UIColor blueColor].CGColor;
+        view.layer.borderWidth = 1.0;
+        [self.view addSubview:view];
+        _imageBoundsView = view;
+    }
+    return _imageBoundsView;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

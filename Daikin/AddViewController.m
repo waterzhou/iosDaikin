@@ -17,7 +17,7 @@
 #define HEIGHT_TEXT_FIELD 30
 #define HEIGHT_SPACE (6+HEIGHT_TEXT_FIELD)
 
-@interface AddViewController ()
+@interface AddViewController ()<UITextFieldDelegate>
 // the state of the confirm/cancel button
 @property (nonatomic, assign) BOOL _isConfirmState;
 // without the condition, if the user tap confirm/cancel quickly enough,
