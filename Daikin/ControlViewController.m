@@ -7,6 +7,9 @@
 //
 
 #import "ControlViewController.h"
+#import "UIViewController+HUD.h"
+#import "NSTimer+Block.h"
+#import "NSTimer+Addition.h"
 #import "ESPSocketClient2.h"
 
 #define SO_CONNECT_RETRY                3
@@ -15,7 +18,10 @@
 #define DEVICE_MESH_PORT                8899
 #define SO_CONNECT_INTERVAL             500
 
-@interface ControlViewController ()
+@interface ControlViewController (){
+    NSMutableString *_cameraString;
+    NSMutableString *_temperatureString;
+}
 @property (nonatomic, strong) TerminalModel *terminal;
 @property (nonatomic, strong) UIButton *button1;
 @property (nonatomic, strong) UIButton *button2;
@@ -26,6 +32,10 @@
 @property (nonatomic, strong) __block ESPSocketClient2 *socket;
 @property (nonatomic, strong) __block NSString *targetInetAddr;
 @property (nonatomic, assign) __block BOOL isClosed;
+@property (nonatomic, strong) NSTimer *timer; // 定时器
+@property (nonatomic, assign) NSUInteger times; // 次数
+@property (nonatomic, assign) NSInteger type; // 0表示温度，1表示camera
+@property (nonatomic, assign) NSUInteger minute; // 时长(分钟)
 
 @end
 
@@ -37,6 +47,11 @@ BOOL isNeedUpdateUI = false;
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         _terminal = terminal;
         _targetInetAddr = terminal.ip;
+        _type = -1;
+        _times = 0;
+        _cameraString = [NSMutableString string];
+        _temperatureString = [NSMutableString string];
+        [self.timer pauseTimer];
     }
     return self;
 }
@@ -71,6 +86,11 @@ BOOL isNeedUpdateUI = false;
 
 #pragma mark - Private
 - (void)click1 {
+    _type = 0;
+    _times = 0;
+    _minute = 0;
+    [self.timer resumeTimer];
+    [self showHudWithTitle:@"正在接收温度数据……"];
     if ([self isConnected] && !_isClosed) {
         [_socket writeStr:@"gettemperature"];
         NSLog(@"get temperature command.......");
@@ -78,7 +98,11 @@ BOOL isNeedUpdateUI = false;
 }
 
 - (void)click2 {
-    //[self addString:@"按钮2"];
+    _type = 1;
+    _times = 0;
+    _minute = 0;
+    [self.timer resumeTimer];
+    [self showHudWithTitle:@"正在接收Camera数据……"];
     if ([self isConnected] && !_isClosed) {
         [_socket writeStr:@"getpicture"];
         NSLog(@"get picture command.......");
@@ -196,11 +220,65 @@ BOOL isNeedUpdateUI = false;
         recvStr = [self hexStringFromString:recvBuffer];
         //recvStr = NSDataToHex(recvBuffer);
         if ([recvStr length] > 0) {
+            _times += 1;
             NSLog(@"DATA:%@", recvStr);
             //isNeedUpdateUI = true;
             [_socket writeStr:@"ok"];
+            if (_type == 0) {
+                [_temperatureString appendString:recvStr];
+                if (self.times == 37) {
+                    // 接收完成
+                    [self stopReceiveData];
+                    // 存储，展示
+                    NSError *error;
+                    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES)firstObject];
+                    NSString *temperaturePath = [documentsPath stringByAppendingPathComponent:@"temperature.txt"];
+                    BOOL isSucceed = [_temperatureString writeToFile:temperaturePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+                    if (isSucceed) {
+                        NSLog(@"写入温度数据成功");
+                    } else {
+                        if (error) {
+                            NSLog(@"写入温度数据失败：%@",error);
+                        }
+                    }
+                }
+            } else if (_type == 1) {
+                [_cameraString appendString:recvStr];
+                if (self.times == 5037) {
+                    // 接收完成
+                    [self stopReceiveData];
+                    // 存储，展示
+                    NSError *error;
+                    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES)firstObject];
+                    NSString *cameraPath = [documentsPath stringByAppendingPathComponent:@"camera.yuv"];
+                    BOOL isSucceed = [_cameraString writeToFile:cameraPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+                    if (isSucceed) {
+                        NSLog(@"写入YUV数据成功");
+                    } else {
+                        if (error) {
+                            NSLog(@"写入YUV数据失败：%@",error);
+                        }
+                    }
+                }
+            }
+            if (self.minute == 5) {
+                // 停止获取数据
+                [self stopReceiveData];
+                _temperatureString = [NSMutableString string];
+                _cameraString = [NSMutableString string];
+            }
         }
      }
+}
+
+- (void)stopReceiveData {
+    __weak typeof(self) ws = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [ws hideHud];
+    });
+    [self.timer pauseTimer];
+    self.times = 0;
+    self.minute = 0;
 }
 
 - (CGFloat)viewWidth {
@@ -277,6 +355,17 @@ BOOL isNeedUpdateUI = false;
         _imageBoundsView = view;
     }
     return _imageBoundsView;
+}
+
+- (NSTimer *)timer {
+    if (!_timer) {
+        __weak typeof(self) ws = self;
+        _timer = [NSTimer timerWithTimeInterval:60 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            ws.minute += 1;
+        }];
+        [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
+    }
+    return _timer;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
