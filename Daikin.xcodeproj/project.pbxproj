@@ -47,6 +47,10 @@
 		76424A5F1DA69D3000240F53 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A491DA69D3000240F53 /* UIScrollView+MJExtension.m */; };
 		76424A601DA69D3000240F53 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A4B1DA69D3000240F53 /* UIScrollView+MJRefresh.m */; };
 		76424A611DA69D3000240F53 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A4D1DA69D3000240F53 /* UIView+MJExtension.m */; };
+		764BE1DD1DBB452F00712BB3 /* UIViewController+HUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 764BE1DC1DBB452F00712BB3 /* UIViewController+HUD.m */; };
+		764BE1E01DBB459A00712BB3 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 764BE1DF1DBB459A00712BB3 /* MBProgressHUD.m */; };
+		764BE1E61DBB470100712BB3 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = 764BE1E31DBB470100712BB3 /* NSTimer+Addition.m */; };
+		764BE1E71DBB470100712BB3 /* NSTimer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 764BE1E51DBB470100712BB3 /* NSTimer+Block.m */; };
 		76530F411DA69720005CAA5C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76530F401DA69720005CAA5C /* main.m */; };
 		76530F441DA69720005CAA5C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76530F431DA69720005CAA5C /* AppDelegate.m */; };
 		76530F471DA69720005CAA5C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76530F461DA69720005CAA5C /* ViewController.m */; };
@@ -55,6 +59,24 @@
 		76530F4F1DA69720005CAA5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76530F4D1DA69720005CAA5C /* LaunchScreen.storyboard */; };
 		76530F5A1DA69720005CAA5C /* DaikinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76530F591DA69720005CAA5C /* DaikinTests.m */; };
 		76530F651DA69720005CAA5C /* DaikinUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76530F641DA69720005CAA5C /* DaikinUITests.m */; };
+		7658D2FF1DBC94680029F7AD /* YRConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 7658D2FE1DBC94670029F7AD /* YRConvert.m */; };
+		7658D3151DBCA2A00029F7AD /* temp1.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3051DBCA2A00029F7AD /* temp1.yuv */; };
+		7658D3161DBCA2A00029F7AD /* temp13.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3061DBCA2A00029F7AD /* temp13.txt */; };
+		7658D3171DBCA2A00029F7AD /* temp14.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3071DBCA2A00029F7AD /* temp14.txt */; };
+		7658D3181DBCA2A00029F7AD /* temp2.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3081DBCA2A00029F7AD /* temp2.yuv */; };
+		7658D3191DBCA2A00029F7AD /* temp5.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3091DBCA2A00029F7AD /* temp5.yuv */; };
+		7658D31A1DBCA2A00029F7AD /* temp_test.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D30A1DBCA2A00029F7AD /* temp_test.yuv */; };
+		7658D31B1DBCA2A00029F7AD /* tulips_uyvy422_inter_packed_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D30B1DBCA2A00029F7AD /* tulips_uyvy422_inter_packed_qcif.yuv */; };
+		7658D31C1DBCA2A00029F7AD /* tulips_uyvy422_prog_packed_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D30C1DBCA2A00029F7AD /* tulips_uyvy422_prog_packed_qcif.yuv */; };
+		7658D31D1DBCA2A00029F7AD /* tulips_yuv422_inter_planar_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D30D1DBCA2A00029F7AD /* tulips_yuv422_inter_planar_qcif.yuv */; };
+		7658D31E1DBCA2A00029F7AD /* tulips_yuv422_prog_planar_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D30E1DBCA2A00029F7AD /* tulips_yuv422_prog_planar_qcif.yuv */; };
+		7658D31F1DBCA2A00029F7AD /* tulips_yuyv422_inter_packed_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D30F1DBCA2A00029F7AD /* tulips_yuyv422_inter_packed_qcif.yuv */; };
+		7658D3201DBCA2A00029F7AD /* tulips_yuyv422_prog_packed_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3101DBCA2A00029F7AD /* tulips_yuyv422_prog_packed_qcif.yuv */; };
+		7658D3211DBCA2A00029F7AD /* tulips_yvu422_inter_planar_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3111DBCA2A00029F7AD /* tulips_yvu422_inter_planar_qcif.yuv */; };
+		7658D3221DBCA2A00029F7AD /* tulips_yvu422_prog_planar_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3121DBCA2A00029F7AD /* tulips_yvu422_prog_planar_qcif.yuv */; };
+		7658D3231DBCA2A00029F7AD /* tulips_yvyu422_inter_packed_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3131DBCA2A00029F7AD /* tulips_yvyu422_inter_packed_qcif.yuv */; };
+		7658D3241DBCA2A00029F7AD /* tulips_yvyu422_prog_packed_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3141DBCA2A00029F7AD /* tulips_yvyu422_prog_packed_qcif.yuv */; };
+		7658D3261DBCB94A0029F7AD /* Picture.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3251DBCB94A0029F7AD /* Picture.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +175,14 @@
 		76424A4B1DA69D3000240F53 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		76424A4C1DA69D3000240F53 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		76424A4D1DA69D3000240F53 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		764BE1DB1DBB452F00712BB3 /* UIViewController+HUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+HUD.h"; sourceTree = "<group>"; };
+		764BE1DC1DBB452F00712BB3 /* UIViewController+HUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+HUD.m"; sourceTree = "<group>"; };
+		764BE1DE1DBB459A00712BB3 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		764BE1DF1DBB459A00712BB3 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		764BE1E21DBB470100712BB3 /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
+		764BE1E31DBB470100712BB3 /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
+		764BE1E41DBB470100712BB3 /* NSTimer+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Block.h"; sourceTree = "<group>"; };
+		764BE1E51DBB470100712BB3 /* NSTimer+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Block.m"; sourceTree = "<group>"; };
 		76530F3C1DA69720005CAA5C /* Daikin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Daikin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76530F401DA69720005CAA5C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		76530F421DA69720005CAA5C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -169,6 +199,25 @@
 		76530F601DA69720005CAA5C /* DaikinUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DaikinUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76530F641DA69720005CAA5C /* DaikinUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DaikinUITests.m; sourceTree = "<group>"; };
 		76530F661DA69720005CAA5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7658D2FD1DBC94670029F7AD /* YRConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YRConvert.h; sourceTree = "<group>"; };
+		7658D2FE1DBC94670029F7AD /* YRConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YRConvert.m; sourceTree = "<group>"; };
+		7658D3051DBCA2A00029F7AD /* temp1.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temp1.yuv; sourceTree = "<group>"; };
+		7658D3061DBCA2A00029F7AD /* temp13.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temp13.txt; sourceTree = "<group>"; };
+		7658D3071DBCA2A00029F7AD /* temp14.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temp14.txt; sourceTree = "<group>"; };
+		7658D3081DBCA2A00029F7AD /* temp2.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temp2.yuv; sourceTree = "<group>"; };
+		7658D3091DBCA2A00029F7AD /* temp5.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temp5.yuv; sourceTree = "<group>"; };
+		7658D30A1DBCA2A00029F7AD /* temp_test.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = temp_test.yuv; sourceTree = "<group>"; };
+		7658D30B1DBCA2A00029F7AD /* tulips_uyvy422_inter_packed_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_uyvy422_inter_packed_qcif.yuv; sourceTree = "<group>"; };
+		7658D30C1DBCA2A00029F7AD /* tulips_uyvy422_prog_packed_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_uyvy422_prog_packed_qcif.yuv; sourceTree = "<group>"; };
+		7658D30D1DBCA2A00029F7AD /* tulips_yuv422_inter_planar_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yuv422_inter_planar_qcif.yuv; sourceTree = "<group>"; };
+		7658D30E1DBCA2A00029F7AD /* tulips_yuv422_prog_planar_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yuv422_prog_planar_qcif.yuv; sourceTree = "<group>"; };
+		7658D30F1DBCA2A00029F7AD /* tulips_yuyv422_inter_packed_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yuyv422_inter_packed_qcif.yuv; sourceTree = "<group>"; };
+		7658D3101DBCA2A00029F7AD /* tulips_yuyv422_prog_packed_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yuyv422_prog_packed_qcif.yuv; sourceTree = "<group>"; };
+		7658D3111DBCA2A00029F7AD /* tulips_yvu422_inter_planar_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yvu422_inter_planar_qcif.yuv; sourceTree = "<group>"; };
+		7658D3121DBCA2A00029F7AD /* tulips_yvu422_prog_planar_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yvu422_prog_planar_qcif.yuv; sourceTree = "<group>"; };
+		7658D3131DBCA2A00029F7AD /* tulips_yvyu422_inter_packed_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yvyu422_inter_packed_qcif.yuv; sourceTree = "<group>"; };
+		7658D3141DBCA2A00029F7AD /* tulips_yvyu422_prog_packed_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yvyu422_prog_packed_qcif.yuv; sourceTree = "<group>"; };
+		7658D3251DBCB94A0029F7AD /* Picture.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Picture.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,6 +405,24 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		764BE1DA1DBB44F500712BB3 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				764BE1DE1DBB459A00712BB3 /* MBProgressHUD.h */,
+				764BE1DF1DBB459A00712BB3 /* MBProgressHUD.m */,
+				764BE1DB1DBB452F00712BB3 /* UIViewController+HUD.h */,
+				764BE1DC1DBB452F00712BB3 /* UIViewController+HUD.m */,
+			);
+			name = HUD;
+			sourceTree = "<group>";
+		};
+		764BE1E11DBB46F200712BB3 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Other;
+			sourceTree = "<group>";
+		};
 		76530F331DA69720005CAA5C = {
 			isa = PBXGroup;
 			children = (
@@ -379,10 +446,17 @@
 		76530F3E1DA69720005CAA5C /* Daikin */ = {
 			isa = PBXGroup;
 			children = (
+				764BE1E11DBB46F200712BB3 /* Other */,
+				764BE1E21DBB470100712BB3 /* NSTimer+Addition.h */,
+				764BE1E31DBB470100712BB3 /* NSTimer+Addition.m */,
+				764BE1E41DBB470100712BB3 /* NSTimer+Block.h */,
+				764BE1E51DBB470100712BB3 /* NSTimer+Block.m */,
+				764BE1DA1DBB44F500712BB3 /* HUD */,
 				2C5EA19B1DB88B230086F21C /* tcp */,
 				2C2459431DACD7D600B374C0 /* udp */,
 				2C2459361DACD77700B374C0 /* util */,
 				2C2459291DACD6EC00B374C0 /* protocol */,
+				76424A1F1DA69D3000240F53 /* MJRefresh */,
 				2C24591F1DACD64200B374C0 /* task */,
 				76424A121DA6983800240F53 /* AddViewController.h */,
 				76424A131DA6983800240F53 /* AddViewController.m */,
@@ -396,7 +470,8 @@
 				76530F431DA69720005CAA5C /* AppDelegate.m */,
 				76530F451DA69720005CAA5C /* ViewController.h */,
 				76530F461DA69720005CAA5C /* ViewController.m */,
-				76424A1F1DA69D3000240F53 /* MJRefresh */,
+				7658D2FD1DBC94670029F7AD /* YRConvert.h */,
+				7658D2FE1DBC94670029F7AD /* YRConvert.m */,
 				76530F481DA69720005CAA5C /* Main.storyboard */,
 				76530F4B1DA69720005CAA5C /* Assets.xcassets */,
 				76530F4D1DA69720005CAA5C /* LaunchScreen.storyboard */,
@@ -409,6 +484,7 @@
 		76530F3F1DA69720005CAA5C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7658D3041DBCA2A00029F7AD /* File */,
 				76530F401DA69720005CAA5C /* main.m */,
 			);
 			name = "Supporting Files";
@@ -430,6 +506,30 @@
 				76530F661DA69720005CAA5C /* Info.plist */,
 			);
 			path = DaikinUITests;
+			sourceTree = "<group>";
+		};
+		7658D3041DBCA2A00029F7AD /* File */ = {
+			isa = PBXGroup;
+			children = (
+				7658D3251DBCB94A0029F7AD /* Picture.txt */,
+				7658D3051DBCA2A00029F7AD /* temp1.yuv */,
+				7658D3061DBCA2A00029F7AD /* temp13.txt */,
+				7658D3071DBCA2A00029F7AD /* temp14.txt */,
+				7658D3081DBCA2A00029F7AD /* temp2.yuv */,
+				7658D3091DBCA2A00029F7AD /* temp5.yuv */,
+				7658D30A1DBCA2A00029F7AD /* temp_test.yuv */,
+				7658D30B1DBCA2A00029F7AD /* tulips_uyvy422_inter_packed_qcif.yuv */,
+				7658D30C1DBCA2A00029F7AD /* tulips_uyvy422_prog_packed_qcif.yuv */,
+				7658D30D1DBCA2A00029F7AD /* tulips_yuv422_inter_planar_qcif.yuv */,
+				7658D30E1DBCA2A00029F7AD /* tulips_yuv422_prog_planar_qcif.yuv */,
+				7658D30F1DBCA2A00029F7AD /* tulips_yuyv422_inter_packed_qcif.yuv */,
+				7658D3101DBCA2A00029F7AD /* tulips_yuyv422_prog_packed_qcif.yuv */,
+				7658D3111DBCA2A00029F7AD /* tulips_yvu422_inter_planar_qcif.yuv */,
+				7658D3121DBCA2A00029F7AD /* tulips_yvu422_prog_planar_qcif.yuv */,
+				7658D3131DBCA2A00029F7AD /* tulips_yvyu422_inter_packed_qcif.yuv */,
+				7658D3141DBCA2A00029F7AD /* tulips_yvyu422_prog_packed_qcif.yuv */,
+			);
+			path = File;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -539,12 +639,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7658D3201DBCA2A00029F7AD /* tulips_yuyv422_prog_packed_qcif.yuv in Resources */,
+				7658D31D1DBCA2A00029F7AD /* tulips_yuv422_inter_planar_qcif.yuv in Resources */,
+				7658D31A1DBCA2A00029F7AD /* temp_test.yuv in Resources */,
+				7658D3211DBCA2A00029F7AD /* tulips_yvu422_inter_planar_qcif.yuv in Resources */,
+				7658D3231DBCA2A00029F7AD /* tulips_yvyu422_inter_packed_qcif.yuv in Resources */,
 				76424A1D1DA6983800240F53 /* ControlViewController.xib in Resources */,
+				7658D31B1DBCA2A00029F7AD /* tulips_uyvy422_inter_packed_qcif.yuv in Resources */,
+				7658D3181DBCA2A00029F7AD /* temp2.yuv in Resources */,
+				7658D31F1DBCA2A00029F7AD /* tulips_yuyv422_inter_packed_qcif.yuv in Resources */,
+				7658D31C1DBCA2A00029F7AD /* tulips_uyvy422_prog_packed_qcif.yuv in Resources */,
 				76530F4F1DA69720005CAA5C /* LaunchScreen.storyboard in Resources */,
+				7658D3191DBCA2A00029F7AD /* temp5.yuv in Resources */,
+				7658D3261DBCB94A0029F7AD /* Picture.txt in Resources */,
+				7658D3161DBCA2A00029F7AD /* temp13.txt in Resources */,
 				76424A5C1DA69D3000240F53 /* MJRefresh.bundle in Resources */,
+				7658D3151DBCA2A00029F7AD /* temp1.yuv in Resources */,
 				76530F4C1DA69720005CAA5C /* Assets.xcassets in Resources */,
+				7658D3241DBCA2A00029F7AD /* tulips_yvyu422_prog_packed_qcif.yuv in Resources */,
 				76424A1B1DA6983800240F53 /* AddViewController.xib in Resources */,
 				76530F4A1DA69720005CAA5C /* Main.storyboard in Resources */,
+				7658D31E1DBCA2A00029F7AD /* tulips_yuv422_prog_planar_qcif.yuv in Resources */,
+				7658D3221DBCA2A00029F7AD /* tulips_yvu422_prog_planar_qcif.yuv in Resources */,
+				7658D3171DBCA2A00029F7AD /* temp14.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +699,7 @@
 				2C24593F1DACD78C00B374C0 /* ESP_NetUtil.m in Sources */,
 				76424A5B1DA69D3000240F53 /* MJRefreshStateHeader.m in Sources */,
 				76424A1A1DA6983800240F53 /* AddViewController.m in Sources */,
+				764BE1E01DBB459A00712BB3 /* MBProgressHUD.m in Sources */,
 				76424A5F1DA69D3000240F53 /* UIScrollView+MJExtension.m in Sources */,
 				76424A591DA69D3000240F53 /* MJRefreshGifHeader.m in Sources */,
 				76424A571DA69D3000240F53 /* MJRefreshBackNormalFooter.m in Sources */,
@@ -594,19 +712,23 @@
 				76424A1C1DA6983800240F53 /* ControlViewController.m in Sources */,
 				76424A531DA69D3000240F53 /* MJRefreshAutoGifFooter.m in Sources */,
 				76424A4F1DA69D3000240F53 /* MJRefreshBackFooter.m in Sources */,
+				764BE1E71DBB470100712BB3 /* NSTimer+Block.m in Sources */,
 				76424A611DA69D3000240F53 /* UIView+MJExtension.m in Sources */,
 				2C2459261DACD66200B374C0 /* ESPTouchResult.m in Sources */,
 				2C2459421DACD79700B374C0 /* IPAddress.c in Sources */,
 				2C2459271DACD66200B374C0 /* ESPTouchTask.m in Sources */,
 				76424A5E1DA69D3000240F53 /* NSBundle+MJRefresh.m in Sources */,
+				7658D2FF1DBC94680029F7AD /* YRConvert.m in Sources */,
 				2C24593E1DACD78C00B374C0 /* ESP_CRC8.m in Sources */,
 				76424A1E1DA6983800240F53 /* TerminalModel.m in Sources */,
 				2C2459281DACD66200B374C0 /* ESPTouchTaskParameter.m in Sources */,
 				76424A511DA69D3000240F53 /* MJRefreshFooter.m in Sources */,
 				2C2459341DACD70500B374C0 /* ESPGuideCode.m in Sources */,
+				764BE1DD1DBB452F00712BB3 /* UIViewController+HUD.m in Sources */,
 				76424A5D1DA69D3000240F53 /* MJRefreshConst.m in Sources */,
 				76424A601DA69D3000240F53 /* UIScrollView+MJRefresh.m in Sources */,
 				76424A561DA69D3000240F53 /* MJRefreshBackGifFooter.m in Sources */,
+				764BE1E61DBB470100712BB3 /* NSTimer+Addition.m in Sources */,
 				76424A521DA69D3000240F53 /* MJRefreshHeader.m in Sources */,
 				76424A5A1DA69D3000240F53 /* MJRefreshNormalHeader.m in Sources */,
 			);

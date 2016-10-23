@@ -222,7 +222,7 @@
     {
     
         memset(_socket_buffer, 0, ESP_SOCKET_BUFFER_LENGTH);
-        int result = esp_socket_recv2(_socket_fd, _socket_buffer, ESP_SOCKET_BUFFER_LENGTH);
+        int result = esp_socket_recv(_socket_fd, _socket_buffer, ESP_SOCKET_BUFFER_LENGTH);
         
         if (result > 0){
             NSLog(@"recvlen=%d", result);
