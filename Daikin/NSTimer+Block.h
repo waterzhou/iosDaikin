@@ -27,7 +27,7 @@
  @param block The block to be executed when the timer fire. The block should take no parameters and have no return value.
  @return A new NSTimer object, configured according to the specified parameters.
  */
-+ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)seconds repeats:(BOOL)repeats block:(void (^)(void))block;
++ (NSTimer *)xw_scheduledTimerWithTimeInterval:(NSTimeInterval)seconds repeats:(BOOL)repeats block:(void (^)(void))block;
 
 /**
  Creates and returns a new NSTimer object initialized with the specified block.
@@ -35,6 +35,6 @@
  @param repeats If YES, the timer will repeatedly reschedule itself until invalidated. If NO, the timer will be invalidated after it fires.
  @param block The block to be executed when the timer fire. The block should take no parameters and have no return value.
  */
-+ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)seconds repeats:(BOOL)repeats block:(void (^)(void))block;
++ (NSTimer *)xw_timerWithTimeInterval:(NSTimeInterval)seconds repeats:(BOOL)repeats block:(void (^)(void))block;
 
 @end

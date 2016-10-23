@@ -11,6 +11,7 @@
 #import "NSTimer+Block.h"
 #import "NSTimer+Addition.h"
 #import "ESPSocketClient2.h"
+#import "YRConvert.h"
 
 #define SO_CONNECT_RETRY                3
 #define SO_TIMEOUT                      4000
@@ -18,15 +19,25 @@
 #define DEVICE_MESH_PORT                8899
 #define SO_CONNECT_INTERVAL             500
 
+static float kc_width  = 176;
+static float kc_height = 144;
+static float kt_width = 96;
+static float kt_height = 46;
+static int kc_size = 25344;
+static int kt_size = 4416;
+
 @interface ControlViewController (){
     NSMutableString *_cameraString;
+    NSMutableData *_cameraData;
     NSMutableString *_temperatureString;
+    NSMutableData *_temperatureData;
 }
+
 @property (nonatomic, strong) TerminalModel *terminal;
 @property (nonatomic, strong) UIButton *button1;
 @property (nonatomic, strong) UIButton *button2;
 @property (nonatomic, strong) UITextView *textView;
-@property (nonatomic, strong) UIScrollView *imageBoundsView;
+@property (nonatomic, strong) UIImageView *imageView;
 // let ESPMeshSocket be executed completely even app entered background
 @property (nonatomic,assign) __block UIBackgroundTaskIdentifier _backgroundTask;
 @property (nonatomic, strong) __block ESPSocketClient2 *socket;
@@ -49,8 +60,7 @@ BOOL isNeedUpdateUI = false;
         _targetInetAddr = terminal.ip;
         _type = -1;
         _times = 0;
-        _cameraString = [NSMutableString string];
-        _temperatureString = [NSMutableString string];
+        [self clearData];
         [self.timer pauseTimer];
     }
     return self;
@@ -64,7 +74,7 @@ BOOL isNeedUpdateUI = false;
     [self button1];
     [self button2];
 //    [self textView];
-    [self imageBoundsView];
+    [self imageView];
     [self createTcpClientTask];
 }
 
@@ -72,6 +82,17 @@ BOOL isNeedUpdateUI = false;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     NSLog(@"didReceiveMemoryWarning.........");
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    NSLog(@"navigate back.....");
+    if (_socket != nil) {
+        [_socket close];
+    }
+
+    [self.timer pauseTimer];
+    _timer = nil;
 }
 
 /*
@@ -220,11 +241,15 @@ BOOL isNeedUpdateUI = false;
         recvStr = [self hexStringFromString:recvBuffer];
         //recvStr = NSDataToHex(recvBuffer);
         if ([recvStr length] > 0) {
+            if (self.times == 0) {
+                [self clearData];
+            }
             _times += 1;
-            NSLog(@"DATA:%@", recvStr);
+            NSLog(@"DATA:%@  times = %ld", recvStr, (unsigned long)self.times);
             //isNeedUpdateUI = true;
             [_socket writeStr:@"ok"];
             if (_type == 0) {
+                [_temperatureData appendData:recvBuffer];
                 [_temperatureString appendString:recvStr];
                 if (self.times == 37) {
                     // 接收完成
@@ -234,8 +259,13 @@ BOOL isNeedUpdateUI = false;
                     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES)firstObject];
                     NSString *temperaturePath = [documentsPath stringByAppendingPathComponent:@"temperature.txt"];
                     BOOL isSucceed = [_temperatureString writeToFile:temperaturePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+                    [_temperatureData writeToFile:[documentsPath stringByAppendingString:@"t_data"] atomically:YES];
                     if (isSucceed) {
                         NSLog(@"写入温度数据成功");
+                        __weak typeof(self) ws = self;
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [ws showTemperatureImage];
+                        });
                     } else {
                         if (error) {
                             NSLog(@"写入温度数据失败：%@",error);
@@ -243,6 +273,7 @@ BOOL isNeedUpdateUI = false;
                     }
                 }
             } else if (_type == 1) {
+                [_cameraData appendData:recvBuffer];
                 [_cameraString appendString:recvStr];
                 if (self.times == 5037) {
                     // 接收完成
@@ -250,10 +281,15 @@ BOOL isNeedUpdateUI = false;
                     // 存储，展示
                     NSError *error;
                     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES)firstObject];
-                    NSString *cameraPath = [documentsPath stringByAppendingPathComponent:@"camera.yuv"];
+                    NSString *cameraPath = [documentsPath stringByAppendingPathComponent:@"camera.txt"];
                     BOOL isSucceed = [_cameraString writeToFile:cameraPath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+                    [_cameraData writeToFile:[documentsPath stringByAppendingPathComponent:@"c_data"] atomically:YES];
                     if (isSucceed) {
                         NSLog(@"写入YUV数据成功");
+                        __weak typeof(self) ws = self;
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [ws showCameraImage];
+                        });
                     } else {
                         if (error) {
                             NSLog(@"写入YUV数据失败：%@",error);
@@ -264,11 +300,17 @@ BOOL isNeedUpdateUI = false;
             if (self.minute == 5) {
                 // 停止获取数据
                 [self stopReceiveData];
-                _temperatureString = [NSMutableString string];
-                _cameraString = [NSMutableString string];
+                [self clearData];
             }
         }
      }
+}
+
+- (void)clearData {
+    _temperatureString = [NSMutableString string];
+    _temperatureData = [NSMutableData data];
+    _cameraString = [NSMutableString string];
+    _cameraData = [NSMutableData data];
 }
 
 - (void)stopReceiveData {
@@ -344,35 +386,230 @@ BOOL isNeedUpdateUI = false;
     return _textView;
 }
 
-- (UIScrollView *)imageBoundsView {
-    if (!_imageBoundsView) {
-        UIScrollView *view = [[UIScrollView alloc] initWithFrame:CGRectMake(30, 280, self.viewWidth - 60, 150)];
-        view.backgroundColor = [UIColor whiteColor];
-        view.layer.cornerRadius = 3.0;
-        view.layer.borderColor = [UIColor blueColor].CGColor;
-        view.layer.borderWidth = 1.0;
-        [self.view addSubview:view];
-        _imageBoundsView = view;
-    }
-    return _imageBoundsView;
-}
-
 - (NSTimer *)timer {
     if (!_timer) {
         __weak typeof(self) ws = self;
-        _timer = [NSTimer timerWithTimeInterval:60 repeats:YES block:^(NSTimer * _Nonnull timer) {
+        _timer = [NSTimer xw_scheduledTimerWithTimeInterval:60 repeats:YES block:^{
             ws.minute += 1;
+            NSLog(@"第%d分钟",ws.minute);
+            if (ws.minute == 5) {
+                [ws stopReceiveData];
+                [ws clearData];
+            }
         }];
         [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
     }
     return _timer;
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    NSLog(@"navigate back.....");
-    if (_socket != nil) {
-        [_socket close];
+- (UIImageView *)imageView {
+    if (!_imageView) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.button2.frame) + 50, CGRectGetWidth(self.view.bounds), kc_height)];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.layer.cornerRadius = 3.0;
+        imageView.layer.borderColor = [UIColor blueColor].CGColor;
+        imageView.layer.borderWidth = 1.0;
+        [self.view addSubview:imageView];
+        _imageView = imageView;
+    }
+    return _imageView;
+}
+
+
+#pragma mark - Conver
+- (void)showTestYUV422UYVYToRGB {
+    NSString *fileName = @"tulips_uyvy422_prog_packed_qcif.yuv";
+    NSString *file = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
+    NSData *reader = [NSData dataWithContentsOfFile:file];
+    unsigned char *yuvBuf = (unsigned char *)[reader bytes];
+    unsigned char rgbbuf[101376] = {0};
+    yuv422packed_to_rgb24(FMT_UYVY, yuvBuf, rgbbuf, kc_width, kc_height);
+    UIImage *img = [[self class] convertBitmapRGBA8ToUIImage:rgbbuf withWidth:kc_width withHeight:kc_height];
+    self.imageView.image = img;
+}
+
+- (void)showTestTemperatureToRGB {
+    NSString *fileName = @"temp13.txt";
+    NSString *file = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
+    NSData *reader = [NSData dataWithContentsOfFile:file];
+
+    NSString *string = [[NSString alloc] initWithData:reader encoding:NSUTF8StringEncoding];
+    reader = [self convertHexStrToData:string];
+    unsigned char *yuvBuf = (unsigned char *)[reader bytes];
+    unsigned char rgbbuf[13248] = {0}; // 17664
+    temperature_to_rgb24(yuvBuf, rgbbuf, kt_width, kt_height);
+    UIImage *img = [[self class] convertBitmapRGBA8ToUIImage:rgbbuf withWidth:kt_width withHeight:kt_height];
+    self.imageView.image = img;
+}
+
+- (void)showTemperatureImage {
+    if (self.imageView.image) {
+        self.imageView.image = nil;
+    }
+    if (_temperatureData.length > kt_size) {
+        [self showHudWithTitle:@"正在显示……"];
+//        NSData *reader = [_temperatureData subdataWithRange:NSMakeRange(0, kt_size)];
+        unsigned char *yuvBuf = (unsigned char *)[_temperatureData bytes];
+        unsigned char rgbbuf[13248] = {0}; // 17664
+        temperature_to_rgb24(yuvBuf, rgbbuf, kt_width, kt_height);
+        UIImage *img = [[self class] convertBitmapRGBA8ToUIImage:rgbbuf withWidth:kt_width withHeight:kt_height];
+        self.imageView.image = img;
+        CGRect frame = self.imageView.frame;
+        self.imageView.frame = CGRectMake((CGRectGetWidth(self.view.bounds) - kt_width)/2, frame.origin.y, kt_width, kt_height);
+        [self hideHud];
+    } else {
+        NSLog(@"显示温度图像错误：越界");
+    }
+
+}
+
+- (void)showCameraImage {
+    if (self.imageView.image) {
+        self.imageView.image = nil;
+    }
+    if (_cameraData.length >= kc_size * 2) {
+        [self showHudWithTitle:@"正在显示……"];
+//        NSData *reader = [_cameraData subdataWithRange:NSMakeRange(0, kc_size * 2)];
+        unsigned char *yuvBuf = (unsigned char *)[_cameraData bytes];
+        unsigned char rgbbuf[101376] = {0};
+        yuv422packed_to_rgb24(FMT_UYVY, yuvBuf, rgbbuf, kc_width, kc_height);
+        UIImage *img = [[self class] convertBitmapRGBA8ToUIImage:rgbbuf withWidth:kc_width withHeight:kc_height];
+        self.imageView.image = img;
+        CGRect frame = self.imageView.frame;
+        self.imageView.frame = CGRectMake((CGRectGetWidth(self.view.bounds) - kc_width)/2, frame.origin.y, kc_width, kc_height);
+        [self hideHud];
+    } else {
+        NSLog(@"显示Camera图像错误：越界");
     }
 }
+
+//十六进制字符串转换成NSData
+- (NSData *)convertHexStrToData:(NSString *)str {
+    if (!str || [str length] == 0) {
+        return nil;
+    }
+
+    NSMutableData *hexData = [[NSMutableData alloc] initWithCapacity:8];
+    NSRange range;
+    if ([str length] % 2 == 0) {
+        range = NSMakeRange(0, 2);
+    } else {
+        range = NSMakeRange(0, 1);
+    }
+    for (NSInteger i = range.location; i < [str length]; i += 2) {
+        unsigned int anInt;
+        NSString *hexCharStr = [str substringWithRange:range];
+        NSScanner *scanner = [[NSScanner alloc] initWithString:hexCharStr];
+
+        [scanner scanHexInt:&anInt];
+        NSData *entity = [[NSData alloc] initWithBytes:&anInt length:1];
+        [hexData appendData:entity];
+
+        range.location += range.length;
+        range.length = 2;
+    }
+    return hexData;
+}
+
+- (void)setImageViewSize:(CGSize)size {
+    CGRect frame = self.imageView.frame;
+    self.imageView.frame = CGRectMake(frame.origin.x, frame.origin.y, size.width, size.height);
+}
+
++ (UIImage *) convertBitmapRGBA8ToUIImage:(unsigned char *) buffer
+                                withWidth:(int) width
+                               withHeight:(int) height {
+
+    // added code
+    char* rgba = (char*)malloc(width*height*4);
+    for(int i=0; i < width*height; ++i) {
+        rgba[4*i] = buffer[3*i];
+        rgba[4*i+1] = buffer[3*i+1];
+        rgba[4*i+2] = buffer[3*i+2];
+        rgba[4*i+3] = 255;
+    }
+    //
+
+    size_t bufferLength = width * height * 4;
+    CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, rgba, bufferLength, NULL);
+    size_t bitsPerComponent = 8;
+    size_t bitsPerPixel = 32;
+    size_t bytesPerRow = 4 * width;
+
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    if(colorSpaceRef == NULL) {
+        NSLog(@"Error allocating color space");
+        CGDataProviderRelease(provider);
+        return nil;
+    }
+
+    CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedLast;
+    CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
+
+    CGImageRef iref = CGImageCreate(width,
+                                    height,
+                                    bitsPerComponent,
+                                    bitsPerPixel,
+                                    bytesPerRow,
+                                    colorSpaceRef,
+                                    bitmapInfo,
+                                    provider,   // data provider
+                                    NULL,       // decode
+                                    YES,            // should interpolate
+                                    renderingIntent);
+
+    uint32_t* pixels = (uint32_t*)malloc(bufferLength);
+
+    if(pixels == NULL) {
+        NSLog(@"Error: Memory not allocated for bitmap");
+        CGDataProviderRelease(provider);
+        CGColorSpaceRelease(colorSpaceRef);
+        CGImageRelease(iref);
+        return nil;
+    }
+
+    CGContextRef context = CGBitmapContextCreate(pixels,
+                                                 width,
+                                                 height,
+                                                 bitsPerComponent,
+                                                 bytesPerRow,
+                                                 colorSpaceRef,
+                                                 bitmapInfo);
+
+    if(context == NULL) {
+        NSLog(@"Error context not created");
+        free(pixels);
+    }
+
+    UIImage *image = nil;
+    if(context) {
+
+        CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, width, height), iref);
+
+        CGImageRef imageRef = CGBitmapContextCreateImage(context);
+
+        // Support both iPad 3.2 and iPhone 4 Retina displays with the correct scale
+        if([UIImage respondsToSelector:@selector(imageWithCGImage:scale:orientation:)]) {
+            float scale = [[UIScreen mainScreen] scale];
+            image = [UIImage imageWithCGImage:imageRef scale:scale orientation:UIImageOrientationUp];
+        } else {
+            image = [UIImage imageWithCGImage:imageRef];
+        }
+
+        CGImageRelease(imageRef);
+        CGContextRelease(context);
+    }
+
+    CGColorSpaceRelease(colorSpaceRef);
+    CGImageRelease(iref);
+    CGDataProviderRelease(provider);
+    
+    if(pixels) {
+        free(pixels);
+    }
+    return image;
+}
+
+
+
 @end
