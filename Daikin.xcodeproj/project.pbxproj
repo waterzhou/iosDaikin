@@ -76,6 +76,7 @@
 		7658D3221DBCA2A00029F7AD /* tulips_yvu422_prog_planar_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3121DBCA2A00029F7AD /* tulips_yvu422_prog_planar_qcif.yuv */; };
 		7658D3231DBCA2A00029F7AD /* tulips_yvyu422_inter_packed_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3131DBCA2A00029F7AD /* tulips_yvyu422_inter_packed_qcif.yuv */; };
 		7658D3241DBCA2A00029F7AD /* tulips_yvyu422_prog_packed_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3141DBCA2A00029F7AD /* tulips_yvyu422_prog_packed_qcif.yuv */; };
+		7658D3261DBCB94A0029F7AD /* Picture.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3251DBCB94A0029F7AD /* Picture.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,6 +217,7 @@
 		7658D3121DBCA2A00029F7AD /* tulips_yvu422_prog_planar_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yvu422_prog_planar_qcif.yuv; sourceTree = "<group>"; };
 		7658D3131DBCA2A00029F7AD /* tulips_yvyu422_inter_packed_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yvyu422_inter_packed_qcif.yuv; sourceTree = "<group>"; };
 		7658D3141DBCA2A00029F7AD /* tulips_yvyu422_prog_packed_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yvyu422_prog_packed_qcif.yuv; sourceTree = "<group>"; };
+		7658D3251DBCB94A0029F7AD /* Picture.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Picture.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -509,6 +511,7 @@
 		7658D3041DBCA2A00029F7AD /* File */ = {
 			isa = PBXGroup;
 			children = (
+				7658D3251DBCB94A0029F7AD /* Picture.txt */,
 				7658D3051DBCA2A00029F7AD /* temp1.yuv */,
 				7658D3061DBCA2A00029F7AD /* temp13.txt */,
 				7658D3071DBCA2A00029F7AD /* temp14.txt */,
@@ -648,6 +651,7 @@
 				7658D31C1DBCA2A00029F7AD /* tulips_uyvy422_prog_packed_qcif.yuv in Resources */,
 				76530F4F1DA69720005CAA5C /* LaunchScreen.storyboard in Resources */,
 				7658D3191DBCA2A00029F7AD /* temp5.yuv in Resources */,
+				7658D3261DBCB94A0029F7AD /* Picture.txt in Resources */,
 				7658D3161DBCA2A00029F7AD /* temp13.txt in Resources */,
 				76424A5C1DA69D3000240F53 /* MJRefresh.bundle in Resources */,
 				7658D3151DBCA2A00029F7AD /* temp1.yuv in Resources */,

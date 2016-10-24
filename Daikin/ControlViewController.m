@@ -27,10 +27,10 @@ static int kc_size = 25344;
 static int kt_size = 4416;
 
 @interface ControlViewController (){
-    NSMutableString *_cameraString;
-    NSMutableData *_cameraData;
-    NSMutableString *_temperatureString;
-    NSMutableData *_temperatureData;
+    NSMutableString *_cameraString; // 相机字符串
+    NSMutableData *_cameraData; // 相机二进制
+    NSMutableString *_temperatureString; // 温度字符串
+    NSMutableData *_temperatureData; // 温度二进制
 }
 
 @property (nonatomic, strong) TerminalModel *terminal;
@@ -76,6 +76,9 @@ BOOL isNeedUpdateUI = false;
 //    [self textView];
     [self imageView];
     [self createTcpClientTask];
+
+    // 测试文件格式Camera数据转成RGB图片
+//    [self showTestCameraToRGB];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,7 +114,11 @@ BOOL isNeedUpdateUI = false;
     _times = 0;
     _minute = 0;
     [self.timer resumeTimer];
-    [self showHudWithTitle:@"正在接收温度数据……"];
+    [self clearData];
+    __weak typeof(self) ws = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [ws showHudWithTitle:@"正在接收温度数据……"];
+    });
     if ([self isConnected] && !_isClosed) {
         [_socket writeStr:@"gettemperature"];
         NSLog(@"get temperature command.......");
@@ -119,16 +126,17 @@ BOOL isNeedUpdateUI = false;
 }
 
 - (void)click2 {
-    _type = 1;
-    _times = 0;
-    _minute = 0;
-    [self.timer resumeTimer];
-    [self showHudWithTitle:@"正在接收Camera数据……"];
-    if ([self isConnected] && !_isClosed) {
-        [_socket writeStr:@"getpicture"];
-        NSLog(@"get picture command.......");
-    }
-
+//    _type = 1;
+//    _times = 0;
+//    _minute = 0;
+//    [self.timer resumeTimer];
+//    [self clearData];
+//    [self showHudWithTitle:@"正在接收Camera数据……"];
+//    if ([self isConnected] && !_isClosed) {
+//        [_socket writeStr:@"getpicture"];
+//        NSLog(@"get picture command.......");
+//    }
+    [self showTestYUV422UYVYToRGB];
 }
 
 - (void)createTcpClientTask {
@@ -241,9 +249,9 @@ BOOL isNeedUpdateUI = false;
         recvStr = [self hexStringFromString:recvBuffer];
         //recvStr = NSDataToHex(recvBuffer);
         if ([recvStr length] > 0) {
-            if (self.times == 0) {
-                [self clearData];
-            }
+//            if (self.times == 0) {
+//                [self clearData];
+//            }
             _times += 1;
             NSLog(@"DATA:%@  times = %ld", recvStr, (unsigned long)self.times);
             //isNeedUpdateUI = true;
@@ -300,7 +308,7 @@ BOOL isNeedUpdateUI = false;
             if (self.minute == 5) {
                 // 停止获取数据
                 [self stopReceiveData];
-                [self clearData];
+//                [self clearData];
             }
         }
      }
@@ -417,7 +425,12 @@ BOOL isNeedUpdateUI = false;
 
 
 #pragma mark - Conver
+// 真正YUV422的文件转成RGB，且是UYVY
 - (void)showTestYUV422UYVYToRGB {
+    __weak typeof(self) ws = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [ws showHudWithTitle:@"图片获取中……"];
+    });
     NSString *fileName = @"tulips_uyvy422_prog_packed_qcif.yuv";
     NSString *file = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
     NSData *reader = [NSData dataWithContentsOfFile:file];
@@ -426,8 +439,14 @@ BOOL isNeedUpdateUI = false;
     yuv422packed_to_rgb24(FMT_UYVY, yuvBuf, rgbbuf, kc_width, kc_height);
     UIImage *img = [[self class] convertBitmapRGBA8ToUIImage:rgbbuf withWidth:kc_width withHeight:kc_height];
     self.imageView.image = img;
+    CGFloat s_width = self.view.bounds.size.width;
+    self.imageView.frame = CGRectMake((s_width - kc_width) / 2, CGRectGetMaxY(self.button2.frame) + 50, kc_width, kc_height);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [ws hideHud];
+    });
 }
 
+// 文本温度文件转RGB图片并显示
 - (void)showTestTemperatureToRGB {
     NSString *fileName = @"temp13.txt";
     NSString *file = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
@@ -442,13 +461,46 @@ BOOL isNeedUpdateUI = false;
     self.imageView.image = img;
 }
 
+// 文本Camera文件转RGB图片并显示
+- (void)showTestCameraToRGB {
+    // 测试使用Picture.txt文件转换成RGB显示，原理如下：
+    /**
+     * 1. 读取字符串，剔除回车和换行符
+     * 2. 字符串转成buffer
+     * 3. YUV422转成RGB24，可以设置YUV422的格式的
+     * 4. 显示图片
+     */
+    NSString *fileName = @"Picture.txt";
+    NSString *file = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:fileName];
+    NSData *reader = [NSData dataWithContentsOfFile:file];
+
+    NSString *string = [[NSString alloc] initWithData:reader encoding:NSUTF8StringEncoding];
+    string = [string stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    reader = [self convertHexStrToData:string];
+    unsigned char *yuvBuf = (unsigned char *)[reader bytes];
+    unsigned char rgbbuf[101376] = {0};
+    
+#warning 重要的类型设置，高宽设置
+    //==============================================================================
+    // 第一个参数可以设置YUV422参数，高宽可以修改常量值
+    yuv422packed_to_rgb24(FMT_UYVY, yuvBuf, rgbbuf, kc_width, kc_height);
+    //==============================================================================
+
+
+    UIImage *img = [[self class] convertBitmapRGBA8ToUIImage:rgbbuf withWidth:kc_width withHeight:kc_height];
+    self.imageView.image = img;
+//    CGRect frame = self.imageView.frame;
+    self.imageView.frame = CGRectMake(0, CGRectGetMaxY(self.button2.frame) + 50, CGRectGetWidth(self.view.bounds), kc_height);
+}
+
+// 根据接收的温度数据显示图片
 - (void)showTemperatureImage {
     if (self.imageView.image) {
         self.imageView.image = nil;
     }
     if (_temperatureData.length > kt_size) {
         [self showHudWithTitle:@"正在显示……"];
-//        NSData *reader = [_temperatureData subdataWithRange:NSMakeRange(0, kt_size)];
         unsigned char *yuvBuf = (unsigned char *)[_temperatureData bytes];
         unsigned char rgbbuf[13248] = {0}; // 17664
         temperature_to_rgb24(yuvBuf, rgbbuf, kt_width, kt_height);
@@ -463,6 +515,7 @@ BOOL isNeedUpdateUI = false;
 
 }
 
+// 根据接收的Camera数据显示图片
 - (void)showCameraImage {
     if (self.imageView.image) {
         self.imageView.image = nil;
