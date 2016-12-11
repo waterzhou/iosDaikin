@@ -76,7 +76,7 @@
 		7658D3221DBCA2A00029F7AD /* tulips_yvu422_prog_planar_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3121DBCA2A00029F7AD /* tulips_yvu422_prog_planar_qcif.yuv */; };
 		7658D3231DBCA2A00029F7AD /* tulips_yvyu422_inter_packed_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3131DBCA2A00029F7AD /* tulips_yvyu422_inter_packed_qcif.yuv */; };
 		7658D3241DBCA2A00029F7AD /* tulips_yvyu422_prog_packed_qcif.yuv in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3141DBCA2A00029F7AD /* tulips_yvyu422_prog_packed_qcif.yuv */; };
-		7658D3261DBCB94A0029F7AD /* Picture.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7658D3251DBCB94A0029F7AD /* Picture.txt */; };
+		767051AF1DFD1C3A0042683C /* ESP_WifiUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 767051AC1DFD1C3A0042683C /* ESP_WifiUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,7 +217,10 @@
 		7658D3121DBCA2A00029F7AD /* tulips_yvu422_prog_planar_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yvu422_prog_planar_qcif.yuv; sourceTree = "<group>"; };
 		7658D3131DBCA2A00029F7AD /* tulips_yvyu422_inter_packed_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yvyu422_inter_packed_qcif.yuv; sourceTree = "<group>"; };
 		7658D3141DBCA2A00029F7AD /* tulips_yvyu422_prog_packed_qcif.yuv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tulips_yvyu422_prog_packed_qcif.yuv; sourceTree = "<group>"; };
-		7658D3251DBCB94A0029F7AD /* Picture.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Picture.txt; sourceTree = "<group>"; };
+		767051AB1DFD1C3A0042683C /* ESP_WifiUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESP_WifiUtil.h; sourceTree = "<group>"; };
+		767051AC1DFD1C3A0042683C /* ESP_WifiUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESP_WifiUtil.m; sourceTree = "<group>"; };
+		767051AD1DFD1C3A0042683C /* ESPTouchDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPTouchDelegate.h; sourceTree = "<group>"; };
+		767051AE1DFD1C3A0042683C /* ESPVersionMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPVersionMacro.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +279,10 @@
 		2C2459361DACD77700B374C0 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				767051AB1DFD1C3A0042683C /* ESP_WifiUtil.h */,
+				767051AC1DFD1C3A0042683C /* ESP_WifiUtil.m */,
+				767051AD1DFD1C3A0042683C /* ESPTouchDelegate.h */,
+				767051AE1DFD1C3A0042683C /* ESPVersionMacro.h */,
 				2C2459401DACD79700B374C0 /* IPAddress.c */,
 				2C2459411DACD79700B374C0 /* IPAddress.h */,
 				2C2459371DACD78C00B374C0 /* ESP_ByteUtil.h */,
@@ -511,7 +518,6 @@
 		7658D3041DBCA2A00029F7AD /* File */ = {
 			isa = PBXGroup;
 			children = (
-				7658D3251DBCB94A0029F7AD /* Picture.txt */,
 				7658D3051DBCA2A00029F7AD /* temp1.yuv */,
 				7658D3061DBCA2A00029F7AD /* temp13.txt */,
 				7658D3071DBCA2A00029F7AD /* temp14.txt */,
@@ -651,7 +657,6 @@
 				7658D31C1DBCA2A00029F7AD /* tulips_uyvy422_prog_packed_qcif.yuv in Resources */,
 				76530F4F1DA69720005CAA5C /* LaunchScreen.storyboard in Resources */,
 				7658D3191DBCA2A00029F7AD /* temp5.yuv in Resources */,
-				7658D3261DBCB94A0029F7AD /* Picture.txt in Resources */,
 				7658D3161DBCA2A00029F7AD /* temp13.txt in Resources */,
 				76424A5C1DA69D3000240F53 /* MJRefresh.bundle in Resources */,
 				7658D3151DBCA2A00029F7AD /* temp1.yuv in Resources */,
@@ -689,6 +694,7 @@
 				2C2459351DACD70500B374C0 /* ESPTouchGenerator.m in Sources */,
 				76530F471DA69720005CAA5C /* ViewController.m in Sources */,
 				76424A4E1DA69D3000240F53 /* MJRefreshAutoFooter.m in Sources */,
+				767051AF1DFD1C3A0042683C /* ESP_WifiUtil.m in Sources */,
 				2C2459481DACD7F700B374C0 /* ESPUDPSocketClient.m in Sources */,
 				76424A551DA69D3000240F53 /* MJRefreshAutoStateFooter.m in Sources */,
 				2C2459331DACD70500B374C0 /* ESPDatumCode.m in Sources */,

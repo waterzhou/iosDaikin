@@ -126,17 +126,17 @@ BOOL isNeedUpdateUI = false;
 }
 
 - (void)click2 {
-//    _type = 1;
-//    _times = 0;
-//    _minute = 0;
-//    [self.timer resumeTimer];
-//    [self clearData];
-//    [self showHudWithTitle:@"正在接收Camera数据……"];
-//    if ([self isConnected] && !_isClosed) {
-//        [_socket writeStr:@"getpicture"];
-//        NSLog(@"get picture command.......");
-//    }
-    [self showTestYUV422UYVYToRGB];
+    _type = 1;
+    _times = 0;
+    _minute = 0;
+    [self.timer resumeTimer];
+    [self clearData];
+    [self showHudWithTitle:@"正在接收Camera数据……"];
+    if ([self isConnected] && !_isClosed) {
+        [_socket writeStr:@"getpicture"];
+        NSLog(@"get picture command.......");
+    }
+//    [self showTestYUV422UYVYToRGB];
 }
 
 - (void)createTcpClientTask {

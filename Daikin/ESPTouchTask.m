@@ -15,8 +15,10 @@
 #import "ESPUDPSocketServer.h"
 #import "ESP_NetUtil.h"
 #import "ESPTouchTaskParameter.h"
+#import "AppDelegate.h"
 
 #define ONE_DATA_LEN    3
+#define ESPTOUCH_VERSION    @"v0.3.5.2"
 
 @interface ESPTouchTask ()
 
@@ -49,12 +51,20 @@
 @property (atomic,strong) NSMutableDictionary *_bssidTaskSucCountDict;
 
 @property (atomic,strong) NSCondition *_esptouchResultArrayCondition;
+
+@property (nonatomic,assign) __block UIBackgroundTaskIdentifier _backgroundTask;
+
+@property (nonatomic,strong) id<ESPTouchDelegate> _esptouchDelegate;
+
+@property (nonatomic,strong) NSData *_localInetAddrData;
+
 @end
 
 @implementation ESPTouchTask
 
 - (id) initWithApSsid: (NSString *)apSsid andApBssid: (NSString *) apBssid andApPwd: (NSString *)apPwd andIsSsidHiden: (BOOL) isSsidHidden
 {
+    NSLog(@"Welcome Esptouch %@",ESPTOUCH_VERSION);
     if (apSsid==nil||[apSsid isEqualToString:@""])
     {
         perror("ESPTouchTask initWithApSsid() apSsid shouldn't be null or empty");
@@ -77,9 +87,39 @@
         self._apPwd = apPwd;
         self._apBssid = apBssid;
         self._parameter = [[ESPTaskParameter alloc]init];
+        
+        // check whether IPv4 and IPv6 is supported
+        NSString *localInetAddr4 = [ESP_NetUtil getLocalIPv4];
+        if (![ESP_NetUtil isIPv4PrivateAddr:localInetAddr4]) {
+            localInetAddr4 = nil;
+        }
+        NSString *localInetAddr6 = [ESP_NetUtil getLocalIPv6];
+        [self._parameter setIsIPv4Supported:localInetAddr4!=nil];
+        [self._parameter setIsIPv6Supported:localInetAddr6!=nil];
+        
+        // create udp client and udp server
         self._client = [[ESPUDPSocketClient alloc]init];
         self._server = [[ESPUDPSocketServer alloc]initWithPort: [self._parameter getPortListening]
                                               AndSocketTimeout: [self._parameter getWaitUdpTotalMillisecond]];
+        // update listening port for IPv6
+        [self._parameter setListeningPort6:self._server.port];
+        if (DEBUG_ON) {
+            NSLog(@"ESPTouchTask app server port is %d",self._server.port);
+        }
+        
+        if (localInetAddr4!=nil) {
+            self._localInetAddrData = [ESP_NetUtil getLocalInetAddress4ByAddr:localInetAddr4];
+        } else {
+            int localPort = [self._parameter getPortListening];
+            self._localInetAddrData = [ESP_NetUtil getLocalInetAddress6ByPort:localPort];
+        }
+        
+        if (DEBUG_ON)
+        {
+            // for ESPTouchGenerator only receive 4 bytes for local address no matter IPv4 or IPv6
+            NSLog(@"ESPTouchTask executeForResult() localInetAddr: %@", [ESP_NetUtil descriptionInetAddr4ByData:self._localInetAddrData]);
+        }
+        
         self._isSuc = NO;
         self._isInterrupt = NO;
         self._isWakeUp = NO;
@@ -151,6 +191,10 @@
         }
         ESPTouchResult *esptouchResult = [[ESPTouchResult alloc]initWithIsSuc:isSuc andBssid:bssid andInetAddrData:inetAddr];
         [self._esptouchResultArray addObject:esptouchResult];
+        if (self._esptouchDelegate != nil)
+        {
+            [self._esptouchDelegate onEsptouchResultAddedWithResult:esptouchResult];
+        }
     }
     [self._esptouchResultArrayCondition unlock];
 }
@@ -164,14 +208,41 @@
         esptouchResult.isCancelled = self.isCancelled;
         [self._esptouchResultArray addObject:esptouchResult];
     }
-    return self._esptouchResultArray;
     [self._esptouchResultArrayCondition unlock];
+    return self._esptouchResultArray;
+}
+
+
+- (void) beginBackgroundTask
+{
+    if (DEBUG_ON)
+    {
+        NSLog(@"ESPTouchTask beginBackgroundTask() entrance");
+    }
+    self._backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        if (DEBUG_ON)
+        {
+            NSLog(@"ESPTouchTask beginBackgroundTask() endBackgroundTask");
+        }
+        [self endBackgroundTask];
+    }];
+}
+
+- (void) endBackgroundTask
+{
+    if (DEBUG_ON)
+    {
+        NSLog(@"ESPTouchTask endBackgroundTask() entrance");
+    }
+    [[UIApplication sharedApplication] endBackgroundTask: self._backgroundTask];
+    self._backgroundTask = UIBackgroundTaskInvalid;
 }
 
 - (void) __listenAsyn: (const int) expectDataLen
 {
     dispatch_queue_t  queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
+        [self beginBackgroundTask];
         if (DEBUG_ON)
         {
             NSLog(@"ESPTouchTask __listenAsyn() start an asyn listen task, current thread is: %@", [NSThread currentThread]);
@@ -187,7 +258,11 @@
         NSData *receiveData = nil;
         while ([self._esptouchResultArray count] < [self._parameter getExpectTaskResultCount] && !self._isInterrupt)
         {
-            receiveData = [self._server receiveSpecLenBytes:expectDataLen];
+            if ([self._parameter isIPv4Supported]) {
+                receiveData = [self._server receiveSpecLenBytes4:expectDataLen];
+            } else {
+                receiveData = [self._server receiveSpecLenBytes6:expectDataLen];
+            }
             if (receiveData != nil)
             {
                 [receiveData getBytes:&receiveOneByte length:1];
@@ -252,6 +327,7 @@
         {
             NSLog(@"ESPTouchTask __listenAsyn() finish");
         }
+        [self endBackgroundTask];
     });
 }
 
@@ -356,14 +432,9 @@
     
     [self __checkTaskValid];
     
-    NSData *localInetAddrData = [ESP_NetUtil getLocalInetAddress];
-    if (DEBUG_ON)
-    {
-        NSLog(@"ESPTouchTask executeForResult() localInetAddr: %@", [ESP_NetUtil descriptionInetAddrByData:localInetAddrData]);
-    }
     // generator the esptouch byte[][] to be transformed, which will cost
     // some time(maybe a bit much)
-    ESPTouchGenerator *generator = [[ESPTouchGenerator alloc]initWithSsid:self._apSsid andApBssid:self._apBssid andApPassword:self._apPwd andInetAddrData:localInetAddrData andIsSsidHidden:self._isSsidHidden];
+    ESPTouchGenerator *generator = [[ESPTouchGenerator alloc]initWithSsid:self._apSsid andApBssid:self._apBssid andApPassword:self._apPwd andInetAddrData:self._localInetAddrData andIsSsidHidden:self._isSsidHidden];
     // listen the esptouch result asyn
     [self __listenAsyn:[self._parameter getEsptouchResultTotalLen]];
     BOOL isSuc = NO;
@@ -376,8 +447,12 @@
         }
     }
     
-    [self __sleep: [self._parameter getWaitUdpReceivingMillisecond]];
-    [self __interrupt];
+    if (!self._isInterrupt)
+    {
+        [self __sleep: [self._parameter getWaitUdpReceivingMillisecond]];
+        [self __interrupt];
+    }
+    
     return [self __getEsptouchResultList];
 }
 
@@ -413,6 +488,11 @@
     self._isWakeUp = YES;
     [self._condition signal];
     [self._condition unlock];
+}
+
+- (void) setEsptouchDelegate: (NSObject<ESPTouchDelegate> *) esptouchDelegate
+{
+    self._esptouchDelegate = esptouchDelegate;
 }
 
 @end
