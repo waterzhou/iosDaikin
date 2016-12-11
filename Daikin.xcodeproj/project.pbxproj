@@ -22,6 +22,7 @@
 		2C2459491DACD7F700B374C0 /* ESPUDPSocketServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2459471DACD7F700B374C0 /* ESPUDPSocketServer.m */; };
 		2C5EA19E1DB88B3A0086F21C /* ESPSocketClient2.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EA19D1DB88B3A0086F21C /* ESPSocketClient2.m */; };
 		2C5EA1A11DB88C020086F21C /* esp_csocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C5EA19F1DB88C020086F21C /* esp_csocket.c */; };
+		7623D50B1DFD31BE00FE1678 /* Picture.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7623D50A1DFD31BE00FE1678 /* Picture.txt */; };
 		76424A1A1DA6983800240F53 /* AddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A131DA6983800240F53 /* AddViewController.m */; };
 		76424A1B1DA6983800240F53 /* AddViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76424A141DA6983800240F53 /* AddViewController.xib */; };
 		76424A1C1DA6983800240F53 /* ControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76424A161DA6983800240F53 /* ControlViewController.m */; };
@@ -127,6 +128,7 @@
 		2C5EA19D1DB88B3A0086F21C /* ESPSocketClient2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPSocketClient2.m; sourceTree = "<group>"; };
 		2C5EA19F1DB88C020086F21C /* esp_csocket.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = esp_csocket.c; sourceTree = "<group>"; };
 		2C5EA1A01DB88C020086F21C /* esp_csocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = esp_csocket.h; sourceTree = "<group>"; };
+		7623D50A1DFD31BE00FE1678 /* Picture.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Picture.txt; sourceTree = "<group>"; };
 		76424A121DA6983800240F53 /* AddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewController.h; sourceTree = "<group>"; };
 		76424A131DA6983800240F53 /* AddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewController.m; sourceTree = "<group>"; };
 		76424A141DA6983800240F53 /* AddViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddViewController.xib; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 		7658D3041DBCA2A00029F7AD /* File */ = {
 			isa = PBXGroup;
 			children = (
+				7623D50A1DFD31BE00FE1678 /* Picture.txt */,
 				7658D3051DBCA2A00029F7AD /* temp1.yuv */,
 				7658D3061DBCA2A00029F7AD /* temp13.txt */,
 				7658D3071DBCA2A00029F7AD /* temp14.txt */,
@@ -657,6 +660,7 @@
 				7658D31C1DBCA2A00029F7AD /* tulips_uyvy422_prog_packed_qcif.yuv in Resources */,
 				76530F4F1DA69720005CAA5C /* LaunchScreen.storyboard in Resources */,
 				7658D3191DBCA2A00029F7AD /* temp5.yuv in Resources */,
+				7623D50B1DFD31BE00FE1678 /* Picture.txt in Resources */,
 				7658D3161DBCA2A00029F7AD /* temp13.txt in Resources */,
 				76424A5C1DA69D3000240F53 /* MJRefresh.bundle in Resources */,
 				7658D3151DBCA2A00029F7AD /* temp1.yuv in Resources */,

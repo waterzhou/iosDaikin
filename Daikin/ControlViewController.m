@@ -19,6 +19,9 @@
 #define DEVICE_MESH_PORT                8899
 #define SO_CONNECT_INTERVAL             500
 
+#define TimeStep 1
+#define MaxTime 5 * 60
+
 static float kc_width  = 176;
 static float kc_height = 144;
 static float kt_width = 96;
@@ -46,7 +49,7 @@ static int kt_size = 4416;
 @property (nonatomic, strong) NSTimer *timer; // 定时器
 @property (nonatomic, assign) NSUInteger times; // 次数
 @property (nonatomic, assign) NSInteger type; // 0表示温度，1表示camera
-@property (nonatomic, assign) NSUInteger minute; // 时长(分钟)
+@property (nonatomic, assign) NSUInteger second; // 时长(秒钟)
 
 @end
 
@@ -112,7 +115,7 @@ BOOL isNeedUpdateUI = false;
 - (void)click1 {
     _type = 0;
     _times = 0;
-    _minute = 0;
+    _second = 0;
     [self.timer resumeTimer];
     [self clearData];
     __weak typeof(self) ws = self;
@@ -128,7 +131,7 @@ BOOL isNeedUpdateUI = false;
 - (void)click2 {
     _type = 1;
     _times = 0;
-    _minute = 0;
+    _second = 0;
     [self.timer resumeTimer];
     [self clearData];
     [self showHudWithTitle:@"正在接收Camera数据……"];
@@ -305,7 +308,7 @@ BOOL isNeedUpdateUI = false;
                     }
                 }
             }
-            if (self.minute == 5) {
+            if (self.second == 5) {
                 // 停止获取数据
                 [self stopReceiveData];
 //                [self clearData];
@@ -328,7 +331,7 @@ BOOL isNeedUpdateUI = false;
     });
     [self.timer pauseTimer];
     self.times = 0;
-    self.minute = 0;
+    self.second = 0;
 }
 
 - (CGFloat)viewWidth {
@@ -397,10 +400,10 @@ BOOL isNeedUpdateUI = false;
 - (NSTimer *)timer {
     if (!_timer) {
         __weak typeof(self) ws = self;
-        _timer = [NSTimer xw_scheduledTimerWithTimeInterval:60 repeats:YES block:^{
-            ws.minute += 1;
-            NSLog(@"第%d分钟",ws.minute);
-            if (ws.minute == 5) {
+        _timer = [NSTimer xw_scheduledTimerWithTimeInterval:TimeStep repeats:YES block:^{
+            ws.second += TimeStep;
+            NSLog(@"第%lu秒钟",(unsigned long)ws.second);
+            if (ws.second == MaxTime) {
                 [ws stopReceiveData];
                 [ws clearData];
             }
