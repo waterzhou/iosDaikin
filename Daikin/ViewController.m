@@ -58,6 +58,7 @@ static NSString *kCellIdentify = @"cell";
 
 - (void)refresh {
     // 这里是下拉刷新执行的方法，可以做一些事情
+    [self.datasource removeAllObjects];
     [self.tableView reloadData];
     NSLog(@"Drag to refresh");
     
