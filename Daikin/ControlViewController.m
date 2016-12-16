@@ -20,7 +20,7 @@
 #define SO_CONNECT_INTERVAL             500
 
 #define TimeStep 1
-#define MaxTime 5 //* 60
+#define MaxTime 5  //* 60
 
 static float kc_width  = 176;
 static float kc_height = 144;
