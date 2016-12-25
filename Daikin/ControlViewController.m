@@ -334,7 +334,6 @@ static int kt_size = 4416;
         [ws hideHud];
     });
     [self.timer pauseTimer];
-    self.times = 0;
     self.second = 0;
 }
 
