@@ -608,7 +608,7 @@
 				TargetAttributes = {
 					76530F3B1DA69720005CAA5C = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 35UJ8V8NEX;
+						DevelopmentTeam = MA33R8944A;
 						ProvisioningStyle = Automatic;
 					};
 					76530F541DA69720005CAA5C = {
@@ -889,7 +889,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 35UJ8V8NEX;
+				DEVELOPMENT_TEAM = MA33R8944A;
 				INFOPLIST_FILE = Daikin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -902,7 +902,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 35UJ8V8NEX;
+				DEVELOPMENT_TEAM = MA33R8944A;
 				INFOPLIST_FILE = Daikin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

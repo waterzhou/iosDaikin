@@ -20,7 +20,7 @@
 #define SO_CONNECT_INTERVAL             500
 
 #define TimeStep 1
-#define MaxTime 5 //* 60
+#define MaxTime 5  //* 60
 
 static float kc_width  = 176;
 static float kc_height = 144;
@@ -256,10 +256,11 @@ BOOL isNeedUpdateUI = false;
 //                [self clearData];
 //            }
             _times += 1;
-            NSLog(@"DATA:%@  times = %ld", recvStr, (unsigned long)self.times);
+            //NSLog(@"DATA:%@  times = %ld", recvStr, (unsigned long)self.times);
             //isNeedUpdateUI = true;
-            [_socket writeStr:@"ok"];
+            
             if (_type == 0) {
+                [_socket writeStr:@"ok"];
                 [_temperatureData appendData:recvBuffer];
                 [_temperatureString appendString:recvStr];
                 if (self.times == 37) {
@@ -284,9 +285,22 @@ BOOL isNeedUpdateUI = false;
                     }
                 }
             } else if (_type == 1) {
-                [_cameraData appendData:recvBuffer];
-                [_cameraString appendString:recvStr];
-                if (self.times == 5037) {
+                // 4*1024=2920+1176
+                //NSLog(@"len =%d", [recvStr length]);
+                NSLog(@"times=%d", self.times);
+                //int count=[[NSString stringWithFormat:@"%u",self.times]intValue];
+                //NSLog(@"count=%d", count);
+                if (self.times%2 == 0)
+                {
+                    NSLog(@"will send back ACK");
+                    [_socket writeStr:@"cameraok"];
+                }
+
+                //[_cameraData appendData:recvBuffer];
+                //[_cameraString appendString:recvStr];
+                //camera total is 150 times here should *2
+                if (self.times == 150*2) {
+                    NSLog(@"already complete one picture");
                     // 接收完成
                     [self stopReceiveData];
                     // 存储，展示
