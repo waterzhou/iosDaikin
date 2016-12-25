@@ -18,6 +18,9 @@
 
 @property (nonatomic, assign) char *socket_buffer;
 
+@property (nonatomic, strong) NSObject *lock_write;
+@property (nonatomic, strong) NSObject *lock_read;
+
 @end
 
 #define ESP_CONN_TIMEOUT_DEFAULT    2000
@@ -35,6 +38,8 @@
     _socket_fd = socketFd;
     _isSoTimeoutSet = NO;
     _soTimeout = ESP_SO_RCV_TIMEOUT_DEFAULT;
+    _lock_write = [[NSObject alloc]init];
+    _lock_read = [[NSObject alloc]init];
 }
 
 /**
@@ -151,22 +156,23 @@
  */
 - (NSString *) localInetAddr4
 {
+    unsigned int ipv4;
     @synchronized(self) {
-        unsigned int ipv4 = esp_socket_getsockname_local_addr4(_socket_fd);
-        if (ipv4==-1) {
-            return nil;
-        } else {
-            NSMutableString *mstr = [[NSMutableString alloc]init];
-            for (int i=0; i<4; i++) {
-                if (i!=0) {
-                    [mstr appendString:@"."];
-                }
-                int value = ipv4&0xff;
-                [mstr appendFormat:@"%d",value];
-                ipv4>>=8;
+        ipv4 = esp_socket_getsockname_local_addr4(_socket_fd);
+    }
+    if (ipv4==-1) {
+        return nil;
+    } else {
+        NSMutableString *mstr = [[NSMutableString alloc]init];
+        for (int i=0; i<4; i++) {
+            if (i!=0) {
+                [mstr appendString:@"."];
             }
-            return mstr;
+            int value = ipv4&0xff;
+            [mstr appendFormat:@"%d",value];
+            ipv4>>=8;
         }
+        return mstr;
     }
 }
 
@@ -177,7 +183,7 @@
  */
 - (NSData *) readData
 {
-    @synchronized(self)
+    @synchronized(_lock_read)
     {
         NSUInteger nBytes = esp_socket_wait_available(_socket_fd,_soTimeout);
         return [self readData:nBytes];
@@ -190,10 +196,9 @@
  * @param nBytes how many bytes to be read
  * @return data from the socket in NSData format or nil if fail
  */
-
 - (NSData *) readData:(NSUInteger)nBytes
 {
-    @synchronized(self)
+    @synchronized(_lock_read)
     {
         if (nBytes > ESP_SOCKET_BUFFER_LENGTH) {
             NSLog(@"ESPSocketClient readData() nBytes = %lu is too large",(unsigned long)nBytes);
@@ -202,33 +207,14 @@
         if (!_isSoTimeoutSet) {
             [self setSoTimeout:_soTimeout];
         }
-        
         int result = esp_socket_recv(_socket_fd, _socket_buffer, (int)nBytes);
         if (result!=0) {
             NSLog(@"ESPSocketClient readData() fail, result is %d",result);
             return nil;
         }
         else {
-            //NSLog(@"nbytes=====%d", nBytes);
             return [NSData dataWithBytes:_socket_buffer length:nBytes];
         }
-    }
-}
-
-
-- (NSData *) readDataDaikin
-{
-    //@synchronized(self)
-    {
-    
-        memset(_socket_buffer, 0, ESP_SOCKET_BUFFER_LENGTH);
-        int result = esp_socket_recv(_socket_fd, _socket_buffer, ESP_SOCKET_BUFFER_LENGTH);
-        
-        if (result > 0){
-            NSLog(@"recvlen=%d", result);
-            return [NSData dataWithBytes:_socket_buffer length:result];
-        }
-        return nil;
     }
 }
 
@@ -239,7 +225,7 @@
  */
 - (NSString *) readStr
 {
-    @synchronized(self)
+    @synchronized(_lock_read)
     {
         NSData *data = [self readData];
         if (data==nil) {
@@ -258,7 +244,7 @@
  */
 - (NSString *) readStr:(NSUInteger)nBytes
 {
-    @synchronized(self)
+    @synchronized(_lock_read)
     {
         NSData *data = [self readData:nBytes];
         if (data==nil) {
@@ -311,7 +297,7 @@
  */
 - (BOOL) writeStr:(NSString *)dataStr Offset:(NSUInteger)offset NStr:(NSUInteger)nStr
 {
-    @synchronized(self)
+    @synchronized(_lock_write)
     {
         NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
         return [self writeData:data Offset:offset NBytes:nStr];
@@ -326,7 +312,7 @@
  */
 - (BOOL) writeStr:(NSString *)dataStr
 {
-    @synchronized(self)
+    @synchronized(_lock_write)
     {
         NSData *data = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
         return [self writeData:data];
@@ -343,7 +329,7 @@
  */
 - (BOOL) writeData:(NSData *)data Offset:(NSUInteger)offset NBytes:(NSUInteger)nBytes
 {
-    @synchronized(self)
+    @synchronized(_lock_write)
     {
         long result = esp_tsocket_send(_socket_fd, [data bytes], (int)nBytes);
         return result==0;
@@ -360,7 +346,7 @@
  */
 - (BOOL) writeData:(NSData *)data
 {
-    @synchronized(self)
+    @synchronized(_lock_write)
     {
         return [self writeData:data Offset:0 NBytes:[data length]];
     }
@@ -372,7 +358,7 @@
  */
 - (void) close
 {
-    @synchronized(self)
+    @synchronized(_lock_write)
     {
         if (!__isClosed) {
             // set close state

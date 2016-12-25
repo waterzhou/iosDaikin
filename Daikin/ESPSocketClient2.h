@@ -122,8 +122,6 @@
  */
 - (NSString *) readStr: (NSUInteger) nBytes;
 
-
-- (NSData *) readDataDaikin;
 #pragma write
 /**
  * write data to the socket
