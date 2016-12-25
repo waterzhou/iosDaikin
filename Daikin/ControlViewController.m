@@ -53,8 +53,8 @@ static int kt_size = 4416;
 
 @end
 
-NSString* recvStr;
-BOOL isNeedUpdateUI = false;
+//NSString* recvStr;
+//BOOL isNeedUpdateUI = false;
 
 @implementation ControlViewController
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil terminal:(TerminalModel *)terminal {
@@ -158,28 +158,22 @@ BOOL isNeedUpdateUI = false;
      });*/
 }
 
-- (void) beginBackgroundTask
-{
- 
+- (void) beginBackgroundTask {
     NSLog(@"ESPMeshSocket beginBackgroundTask() entrance");
-    
     self._backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
             NSLog(@"ESPMeshSocket beginBackgroundTask() endBackgroundTask");
         [self endBackgroundTask];
     }];
 }
 
-- (void) endBackgroundTask
-{
+- (void) endBackgroundTask {
     NSLog(@"ESPMeshSocket endBackgroundTask() entrance");
     [[UIApplication sharedApplication] endBackgroundTask: self._backgroundTask];
     self._backgroundTask = UIBackgroundTaskInvalid;
 }
 
-- (ESPSocketClient2 *) open:(NSString *)remoteInetAddr
-{
+- (ESPSocketClient2 *) open:(NSString *)remoteInetAddr {
     ESPSocketClient2 *socket = nil;
-    
     BOOL isConnected = NO;
     for (int retry = 0; !isConnected && retry < SO_CONNECT_RETRY; ++retry) {
         // connect to target device(root device)
@@ -210,13 +204,11 @@ BOOL isNeedUpdateUI = false;
     }
 }
 
-- (BOOL) isConnected
-{
+- (BOOL) isConnected {
     return _socket != nil && [_socket isConnected];
 }
 
-- (BOOL) isClosed
-{
+- (BOOL) isClosed {
     return (_socket != nil && [_socket isClosed]) || _isClosed;
 }
 
@@ -224,10 +216,8 @@ BOOL isNeedUpdateUI = false;
  
     Byte *bytes = (Byte *)[myD bytes];
     //下面是Byte 转换为16进制。
-    NSString *hexStr=@"";
-    for(int i=0;i<[myD length];i++)
-        
-    {
+    NSString *hexStr = @"";
+    for (int i = 0; i < [myD length]; i++) {
         NSString *newHexStr = [NSString stringWithFormat:@"%x",bytes[i]&0xff];///16进制数
         
         if([newHexStr length]==1)
@@ -238,23 +228,23 @@ BOOL isNeedUpdateUI = false;
     return hexStr; 
 }
 
-- (void) loop
-{
+- (void) loop {
     [self beginBackgroundTask];
     // connect to the target
     if (_socket == nil) {
         NSLog(@"Open one socket");
         _socket = [self open:_targetInetAddr];
     }
+
     while ([self isConnected] && !_isClosed) {
         //NSLog(@"recv.......");
         NSData * recvBuffer = [_socket readData];
-        recvStr = [self hexStringFromString:recvBuffer];
+        NSString *recvStr = [self hexStringFromString:recvBuffer];
         //recvStr = NSDataToHex(recvBuffer);
         if ([recvStr length] > 0) {
-//            if (self.times == 0) {
-//                [self clearData];
-//            }
+            if (self.times == 0) {
+                [self clearData];
+            }
             _times += 1;
             //NSLog(@"DATA:%@  times = %ld", recvStr, (unsigned long)self.times);
             //isNeedUpdateUI = true;
@@ -287,19 +277,19 @@ BOOL isNeedUpdateUI = false;
             } else if (_type == 1) {
                 // 4*1024=2920+1176
                 //NSLog(@"len =%d", [recvStr length]);
-                NSLog(@"times=%d", self.times);
+                NSLog(@"times=%lu", (unsigned long)self.times);
                 //int count=[[NSString stringWithFormat:@"%u",self.times]intValue];
                 //NSLog(@"count=%d", count);
-                if (self.times%2 == 0)
-                {
+
+                if (self.times % 2 == 0) {
                     NSLog(@"will send back ACK");
                     [_socket writeStr:@"cameraok"];
                 }
 
-                //[_cameraData appendData:recvBuffer];
-                //[_cameraString appendString:recvStr];
+                [_cameraData appendData:recvBuffer];
+                [_cameraString appendString:recvStr];
                 //camera total is 150 times here should *2
-                if (self.times == 150*2) {
+                if (self.times == 150 * 2) {
                     NSLog(@"already complete one picture");
                     // 接收完成
                     [self stopReceiveData];
@@ -322,10 +312,10 @@ BOOL isNeedUpdateUI = false;
                     }
                 }
             }
-            if (self.second == 5) {
+            if (self.second == MaxTime) {
                 // 停止获取数据
                 [self stopReceiveData];
-//                [self clearData];
+                [self clearData];
             }
         }
      }
