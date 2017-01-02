@@ -144,8 +144,9 @@ static int kt_size = 4416;
 
 - (void)createTcpClientTask {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(queue, ^{
+    dispatch_async(queue, ^{@autoreleasepool {
         [self loop];
+    }
     });
     /*dispatch_async(dispatch_get_main_queue(), ^{
      // Your UI code
@@ -235,13 +236,14 @@ static int kt_size = 4416;
         NSLog(@"Open one socket");
         _socket = [self open:_targetInetAddr];
     }
-
+    NSUInteger packetIndex = 0;
+    NSUInteger countIndex = 0;
     while ([self isConnected] && !_isClosed) {
         //NSLog(@"recv.......");
         NSData * recvBuffer = [_socket readData];
-        NSString *recvStr = [self hexStringFromString:recvBuffer];
+        //NSString *recvStr = [self hexStringFromString:recvBuffer];
         //recvStr = NSDataToHex(recvBuffer);
-        if ([recvStr length] > 0) {
+        if ([recvBuffer length] > 0) {
             if (self.times == 0) {
                 [self clearData];
             }
@@ -252,7 +254,7 @@ static int kt_size = 4416;
             if (_type == 0) {
                 [_socket writeStr:@"ok"];
                 [_temperatureData appendData:recvBuffer];
-                [_temperatureString appendString:recvStr];
+               // [_temperatureString appendString:recvStr];
                 if (self.times == 37) {
                     // 接收完成
                     [self stopReceiveData];
@@ -276,20 +278,25 @@ static int kt_size = 4416;
                 }
             } else if (_type == 1) {
                 // 4*1024=2920+1176
-                //NSLog(@"len =%d", [recvStr length]);
-                NSLog(@"times=%lu", (unsigned long)self.times);
+                
+                packetIndex += [recvBuffer length];
+                NSLog(@"times=%lu index=%ld", (unsigned long)self.times,packetIndex);
                 //int count=[[NSString stringWithFormat:@"%u",self.times]intValue];
                 //NSLog(@"count=%d", count);
 
-                if (self.times % 2 == 0) {
-                    NSLog(@"will send back ACK");
+               //if (self.times % 2 == 0) {
+                if(packetIndex == 4096){
+                    packetIndex = 0;
+                    countIndex++;
+                    NSLog(@"will send back ACK-%d",countIndex);
                     [_socket writeStr:@"cameraok"];
-                }
+               }
 
                 [_cameraData appendData:recvBuffer];
-                [_cameraString appendString:recvStr];
+                //[_cameraString appendString:recvStr];
                 //camera total is 150 times here should *2
-                if (self.times == 150 * 2) {
+                if (countIndex == 150) {
+                    countIndex = 0;
                     NSLog(@"already complete one picture");
                     // 接收完成
                     [self stopReceiveData];
