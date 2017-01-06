@@ -538,7 +538,7 @@ static int kt_size = 4416;
         [self showHudWithTitle:@"正在显示……"];
 //        NSData *reader = [_cameraData subdataWithRange:NSMakeRange(0, kc_size * 2)];
         unsigned char *yuvBuf = (unsigned char *)[_cameraData bytes];
-        unsigned char rgbbuf[640*480*4] = {0};
+        unsigned char rgbbuf[640*480*3] = {0};
         yuv422packed_to_rgb24(FMT_VYUY, yuvBuf, rgbbuf, kc_width, kc_height);
         UIImage *img = [[self class] convertBitmapRGBA8ToUIImage:rgbbuf withWidth:kc_width withHeight:kc_height];
         self.imageView.image = img;
