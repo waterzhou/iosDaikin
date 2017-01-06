@@ -10,9 +10,9 @@
 
 typedef NS_ENUM(NSInteger, YUV_TYPE) {
     FMT_YUYV = 0,
-    FMT_YVYU,//
-    FMT_UYVY,//
-    FMT_VYUY,
+    FMT_YVYU,//no
+    FMT_UYVY,//no
+    FMT_VYUY,//no
 };
 
 @interface YRConvert : NSObject

@@ -22,11 +22,11 @@
 #define TimeStep 60
 #define MaxTime 5 * 60
 
-static float kc_width  = 176;
-static float kc_height = 144;
+static float kc_width  = 640;
+static float kc_height = 480;
 static float kt_width = 96;
 static float kt_height = 46;
-static int kc_size = 25344;
+static int kc_size = 640*480;
 static int kt_size = 4416;
 
 @interface ControlViewController (){
@@ -533,12 +533,13 @@ static int kt_size = 4416;
     if (self.imageView.image) {
         self.imageView.image = nil;
     }
+    NSLog(@"=====camera length=%d",_cameraData.length);
     if (_cameraData.length >= kc_size * 2) {
         [self showHudWithTitle:@"正在显示……"];
 //        NSData *reader = [_cameraData subdataWithRange:NSMakeRange(0, kc_size * 2)];
         unsigned char *yuvBuf = (unsigned char *)[_cameraData bytes];
-        unsigned char rgbbuf[101376] = {0};
-        yuv422packed_to_rgb24(FMT_UYVY, yuvBuf, rgbbuf, kc_width, kc_height);
+        unsigned char rgbbuf[640*480*4] = {0};
+        yuv422packed_to_rgb24(FMT_VYUY, yuvBuf, rgbbuf, kc_width, kc_height);
         UIImage *img = [[self class] convertBitmapRGBA8ToUIImage:rgbbuf withWidth:kc_width withHeight:kc_height];
         self.imageView.image = img;
         CGRect frame = self.imageView.frame;
